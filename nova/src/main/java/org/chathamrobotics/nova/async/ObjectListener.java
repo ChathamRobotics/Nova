@@ -21,7 +21,7 @@ public class ObjectListener<T> extends Listener {
      * @param <T>   the type of the object
      */
     public interface Condition<T> {
-        boolean test(T value);
+        boolean test(T value) throws Exception;
     }
 
     /**
@@ -33,7 +33,7 @@ public class ObjectListener<T> extends Listener {
     public ObjectListener(@NonNull final T object, @NonNull final Condition<T> condition, @NonNull AsyncCallback handler) {
         super(new Listener.Condition() {
             @Override
-            public boolean test() {
+            public boolean test() throws Exception {
                 return condition.test(object);
             }
         }, handler);
