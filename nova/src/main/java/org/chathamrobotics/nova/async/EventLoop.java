@@ -63,7 +63,7 @@ public class EventLoop {
      * @param handler   the handler for when the condition is met
      * @return          the listener. Null if was unsuccessful
      */
-    public Listener addListener(@NonNull Listener.Condition condition, @NonNull Runnable handler) {
+    public Listener addListener(@NonNull Listener.Condition condition, @NonNull AsyncCallback handler) {
         return addListener(new Listener(condition, handler));
     }
 

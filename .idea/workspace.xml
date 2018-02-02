@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff747fdf-8d3c-4c9e-a992-bf30ea94a947" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/AsyncCallback.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,7 +26,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NovaEventLoop.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NovaEventLoop.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="414">
@@ -35,6 +35,16 @@
                 <element signature="e#257#302#0" expanded="true" />
                 <element signature="method#on#0;class#NovaEventLoop#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AsyncCallback.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/AsyncCallback.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="26" lean-forward="false" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -91,6 +101,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -1859,6 +1870,7 @@
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/ObjectListener.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" />
+        <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/AsyncCallback.java" />
       </list>
     </option>
   </component>
@@ -2670,6 +2682,14 @@
             <element signature="e#257#302#0" expanded="true" />
             <element signature="method#on#0;class#NovaEventLoop#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/AsyncCallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="26" lean-forward="false" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>

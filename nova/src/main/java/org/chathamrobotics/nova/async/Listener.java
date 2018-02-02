@@ -27,19 +27,30 @@ public class Listener {
     }
 
     private final Condition condition;
-    private final Runnable handler;
+    private final AsyncCallback handler;
 
     /**
      * Creates a new instance of {@link Listener}
      * @param condition the condition to listen for
      * @param handler   the handler for when the condition is met
      */
-    public Listener(@NonNull Condition condition, @NonNull Runnable handler) {
+    public Listener(@NonNull Condition condition, @NonNull AsyncCallback handler) {
         this.condition = condition;
         this.handler = handler;
     }
 
+    /**
+     * Runs the listener
+     */
     public void run() {
-        if (condition.test()) handler.run();
+        boolean result;
+        try {
+            result = condition.test();
+        } catch (Throwable thr) {
+            handler.run(thr);
+            return;
+        }
+
+        if (result) handler.run(null);
     }
 }

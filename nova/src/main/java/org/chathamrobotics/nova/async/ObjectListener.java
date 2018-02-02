@@ -14,7 +14,7 @@ import android.support.annotation.NonNull;
  * Listens for conditions pertaining to a object
  * @param <T>   the type of the object
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class ObjectListener<T> extends Listener {
     /**
      * Condition based on a object
@@ -30,7 +30,7 @@ public class ObjectListener<T> extends Listener {
      * @param condition the condition to test
      * @param handler   the handler to be called when the condition is met
      */
-    public ObjectListener(@NonNull final T object, @NonNull final Condition<T> condition, @NonNull Runnable handler) {
+    public ObjectListener(@NonNull final T object, @NonNull final Condition<T> condition, @NonNull AsyncCallback handler) {
         super(new Listener.Condition() {
             @Override
             public boolean test() {

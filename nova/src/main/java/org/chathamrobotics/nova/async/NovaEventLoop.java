@@ -38,7 +38,7 @@ public class NovaEventLoop extends EventLoop {
     public <T> ObjectListener<T> on(
             @NonNull T object,
             @NonNull ObjectListener.Condition<T> condition,
-            @NonNull Runnable handler
+            @NonNull AsyncCallback handler
     ) {
         ObjectListener<T> listener = new ObjectListener<>(object, condition, handler);
         return addListener(listener) == null ? null : listener;
