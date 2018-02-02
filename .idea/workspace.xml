@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff747fdf-8d3c-4c9e-a992-bf30ea94a947" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -41,20 +39,31 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Listener.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+              <folding>
+                <element signature="e#254#299#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="EventLoop.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="30" column="57" lean-forward="true" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+            <state relative-caret-position="208">
+              <caret line="101" column="37" lean-forward="false" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1477#1478#0" expanded="true" />
+                <element signature="e#809#1166#0" expanded="true" />
+                <element signature="e#1165#1166#0" expanded="true" />
+                <element signature="method#stop#0;class#EventLoop#0" expanded="false" />
                 <element signature="method#addListener#0;class#EventLoop#0" expanded="false" />
                 <element signature="method#addListener#1;class#EventLoop#0" expanded="false" />
                 <element signature="method#removeAllListeners#0;class#EventLoop#0" expanded="false" />
-                <element signature="method#removeAllListeners#1;class#EventLoop#0" expanded="false" />
-                <element signature="method#removeListener#0;class#EventLoop#0" expanded="false" />
-                <element signature="method#startPolling#0;class#EventLoop#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -1828,9 +1837,9 @@
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/Controller.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/util/ClassModifier.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/util/Controller.java" />
-        <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/PollingThread.java" />
+        <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java" />
       </list>
     </option>
@@ -2547,18 +2556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#320#347#0" expanded="true" />
-            <element signature="e#1244#1245#0" expanded="true" />
-            <element signature="e#1300#1301#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/sdk/platforms/android-23/android.jar!/java/util/concurrent/ConcurrentHashMap.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -2576,16 +2573,16 @@
           <caret line="11" column="42" lean-forward="true" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
           <folding>
             <element signature="method#Controller#0;class#Controller#0" expanded="false" />
-            <element signature="e#3028#3201#0" expanded="true" />
-            <element signature="e#3200#3201#0" expanded="true" />
+            <element signature="e#3028#3201#0" expanded="false" />
+            <element signature="e#3200#3201#0" expanded="false" />
             <element signature="method#update#0;class#Controller#0" expanded="false" />
             <element signature="method#isPressed#0;class#Controller#0" expanded="false" />
-            <element signature="e#5975#5976#0" expanded="true" />
-            <element signature="e#6023#6024#0" expanded="true" />
-            <element signature="e#6270#6271#0" expanded="true" />
-            <element signature="e#6324#6325#0" expanded="true" />
-            <element signature="e#6565#6566#0" expanded="true" />
-            <element signature="e#6617#6618#0" expanded="true" />
+            <element signature="e#5975#5976#0" expanded="false" />
+            <element signature="e#6023#6024#0" expanded="false" />
+            <element signature="e#6270#6271#0" expanded="false" />
+            <element signature="e#6324#6325#0" expanded="false" />
+            <element signature="e#6565#6566#0" expanded="false" />
+            <element signature="e#6617#6618#0" expanded="false" />
             <element signature="method#updateButtonState#0;class#Controller#0" expanded="false" />
           </folding>
         </state>
@@ -2595,6 +2592,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-46">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/PollingThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -2609,27 +2614,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/PollingThread.java">
+    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="24" />
-          <folding />
+        <state relative-caret-position="136">
+          <caret line="17" column="7" lean-forward="true" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
+          <folding>
+            <element signature="e#254#299#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="30" column="57" lean-forward="true" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        <state relative-caret-position="208">
+          <caret line="101" column="37" lean-forward="false" selection-start-line="101" selection-start-column="37" selection-end-line="101" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1477#1478#0" expanded="true" />
+            <element signature="e#809#1166#0" expanded="true" />
+            <element signature="e#1165#1166#0" expanded="true" />
+            <element signature="method#stop#0;class#EventLoop#0" expanded="false" />
             <element signature="method#addListener#0;class#EventLoop#0" expanded="false" />
             <element signature="method#addListener#1;class#EventLoop#0" expanded="false" />
             <element signature="method#removeAllListeners#0;class#EventLoop#0" expanded="false" />
-            <element signature="method#removeAllListeners#1;class#EventLoop#0" expanded="false" />
-            <element signature="method#removeListener#0;class#EventLoop#0" expanded="false" />
-            <element signature="method#startPolling#0;class#EventLoop#0" expanded="false" />
           </folding>
         </state>
       </provider>

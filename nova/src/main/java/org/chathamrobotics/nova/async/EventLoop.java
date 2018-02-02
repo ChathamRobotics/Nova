@@ -14,8 +14,6 @@ import android.util.Log;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * A external event loop that operates in it's own thread. The event loop will only run if it has
@@ -27,7 +25,7 @@ public class EventLoop {
 
     protected String tag = TAG;
 
-    private final ConcurrentHashMap<Object, List<Listener>> listeners = new ConcurrentHashMap<>();
+    private final List<Listener> listeners = Collections.synchronizedList(new LinkedList<Listener>());
 
     private final Runnable pollingLoop = new Runnable() {
         @Override
@@ -35,15 +33,8 @@ public class EventLoop {
             while(true) {
                 if (Thread.interrupted()) break;
 
-                for (Map.Entry<Object, List<Listener>> listenersEntry : listeners.entrySet()) {
-                    for (Listener listener : listenersEntry.getValue())
-                        synchronized (listenersEntry.getKey()) {
-                            listener.run(listenersEntry.getKey());
-                        }
-
-                    if (listenersEntry.getValue().size() == 0)
-                        listeners.remove(listenersEntry.getKey());
-                }
+                for (Listener listener : listeners)
+                    listener.run();
 
                 if (listeners.isEmpty()) break;
             }
@@ -67,34 +58,24 @@ public class EventLoop {
     /**
      * Adds a listener to the event loop
      * @see Listener
-     * @param key       the listener key. This is was is used to test the condition
      * @param condition the condition to test
      * @param handler   the handler for when the condition is met
-     * @param <T>       the type of the key
      * @return          whether or not the add was successful
      */
-    public <T> boolean addListener(T key, Listener.Condition<T> condition, Runnable handler) {
-        return addListener(key, new Listener<>(condition, handler));
+    public boolean addListener(Listener.Condition condition, Runnable handler) {
+        return addListener(new Listener(condition, handler));
     }
 
     /**
      * Adds a listener to te event loop
-     * @param key       the listener key. This is was is used to test the condition
      * @param listener  the listener
-     * @param <T>       the type of the key
      * @return          whether or not the add was successful
      */
-    public <T> boolean addListener(T key, Listener<T> listener) {
-        List<Listener> tListeners = listeners.get(key);
+    public boolean addListener(Listener listener) {
         boolean result;
 
-        if (tListeners == null) {
-            tListeners = Collections.synchronizedList(new LinkedList<Listener>());
-            listeners.put(key, tListeners);
-        }
-
-        result = tListeners.add(listener);
-        if (result) Log.d(tag, "Added listener on " + key);
+        result = listeners.add(listener);
+        if (result) Log.d(tag, "Added listener (" + listener + ")");
 
         startPolling();
 
@@ -110,27 +91,13 @@ public class EventLoop {
     }
 
     /**
-     * Removes all of the listeners for the given key
-     * @param key   the key whose listeners should be removed
-     * @param <T>   the type of the key
-     * @return      the removed listeners. Null if unsuccessful
-     */
-    public <T> List<Listener> removeAllListeners(T key) {
-        List<Listener> result = listeners.remove(key);
-        Log.d(tag, "removed all listeners for " + key);
-        return result;
-    }
-
-    /**
      * Removes the listener
-     * @param key       the listener's key
      * @param listener  the listener
-     * @param <T>       the type of the key
      * @return          the removed listener. Null if unsuccessful.
      */
-    public <T> Listener<T> removeListener(T key, Listener<T> listener) {
-       boolean result = listeners.get(key).remove(listener);
-       Log.d(tag, "Removed " + listener + " from " + key);
+    public Listener removeListener(Listener listener) {
+       boolean result = listeners.remove(listener);
+       Log.d(tag, "Removed Listener (" + listener + ")");
        return result ? listener : null;
     }
 
