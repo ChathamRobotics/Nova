@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff747fdf-8d3c-4c9e-a992-bf30ea94a947" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitterImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/ObjectListener.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/ObjectListener.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -33,66 +27,102 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NovaEventLoop.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NovaEventLoop.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="66" column="5" lean-forward="true" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+            <state relative-caret-position="1802">
+              <caret line="120" column="43" lean-forward="false" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
               <folding>
                 <element signature="method#on#0;class#NovaEventLoop#0" expanded="false" />
                 <element signature="method#on#1;class#NovaEventLoop#0" expanded="false" />
                 <element signature="method#on#2;class#NovaEventLoop#0" expanded="false" />
                 <element signature="method#once#0;class#NovaEventLoop#0" expanded="false" />
+                <element signature="method#once#1;class#NovaEventLoop#0" expanded="false" />
+                <element signature="method#once#2;class#NovaEventLoop#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AsyncCallback.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/AsyncCallback.java">
+      <file leaf-file-name="EventEmitter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="28" lean-forward="false" selection-start-line="19" selection-start-column="28" selection-end-line="19" selection-end-column="28" />
+            <state relative-caret-position="272">
+              <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+              <folding>
+                <element signature="e#293#320#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassManagerFactory.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/FtcCommon-release-sources.jar!/com/qualcomm/ftccommon/ClassManagerFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Listener.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java">
+      <file leaf-file-name="ClassManager.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/internal/opmode/ClassManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="86" column="36" lean-forward="false" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="class#Condition#0;class#Listener#0" expanded="false" />
-                <element signature="method#timeout#0;class#Listener#0" expanded="false" />
-                <element signature="e#1321#1677#0" expanded="true" />
-                <element signature="e#1676#1677#0" expanded="true" />
-                <element signature="method#callLimit#0;class#Listener#0" expanded="false" />
-                <element signature="method#once#0;class#Listener#0" expanded="false" />
-                <element signature="method#Listener#0;class#Listener#0" expanded="false" />
-                <element signature="method#run#0;class#Listener#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="39">
+              <caret line="65" column="13" lean-forward="false" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventLoop.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventLoop.java">
+      <file leaf-file-name="Acceleration.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/Acceleration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-214">
-              <caret line="58" column="7" lean-forward="true" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
+            <state relative-caret-position="85">
+              <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AngularVelocity.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/AngularVelocity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-318">
+              <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DistanceUnit.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/DistanceUnit.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="39" column="12" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VuforiaLocalizerImpl.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/internal/vuforia/VuforiaLocalizerImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="111" column="13" lean-forward="false" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EventEmitterImpl.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitterImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="381">
+              <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#463#508#0" expanded="true" />
-                <element signature="e#783#1140#0" expanded="true" />
-                <element signature="e#1139#1140#0" expanded="true" />
-                <element signature="method#stop#0;class#EventLoop#0" expanded="false" />
-                <element signature="method#addListener#0;class#EventLoop#0" expanded="false" />
-                <element signature="method#removeAllListeners#0;class#EventLoop#0" expanded="false" />
-                <element signature="method#removeListener#0;class#EventLoop#0" expanded="false" />
-                <element signature="method#startPolling#0;class#EventLoop#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -118,8 +148,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -1889,6 +1919,8 @@
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/ObjectListener.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java" />
         <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java" />
+        <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitter.java" />
+        <option value="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitterImpl.java" />
       </list>
     </option>
   </component>
@@ -2223,6 +2255,27 @@
       </ExternalSystemSettings>
       <method />
     </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <envs />
@@ -2395,6 +2448,8 @@
             <element signature="method#on#1;class#NovaEventLoop#0" expanded="false" />
             <element signature="method#on#2;class#NovaEventLoop#0" expanded="false" />
             <element signature="method#once#0;class#NovaEventLoop#0" expanded="false" />
+            <element signature="method#once#1;class#NovaEventLoop#0" expanded="false" />
+            <element signature="method#once#2;class#NovaEventLoop#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2495,13 +2550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/FtcCommon-release-sources.jar!/com/qualcomm/ftccommon/ClassManagerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="49" column="13" lean-forward="false" selection-start-line="49" selection-start-column="13" selection-end-line="49" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2668,8 +2716,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/Listener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="86" column="36" lean-forward="false" selection-start-line="86" selection-start-column="36" selection-end-line="86" selection-end-column="36" />
+        <state relative-caret-position="453">
+          <caret line="90" column="5" lean-forward="true" selection-start-line="90" selection-start-column="5" selection-end-line="90" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Condition#0;class#Listener#0" expanded="false" />
@@ -2699,13 +2747,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/NovaEventLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="66" column="5" lean-forward="true" selection-start-line="66" selection-start-column="5" selection-end-line="66" selection-end-column="5" />
+        <state relative-caret-position="1802">
+          <caret line="120" column="43" lean-forward="false" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
           <folding>
             <element signature="method#on#0;class#NovaEventLoop#0" expanded="false" />
             <element signature="method#on#1;class#NovaEventLoop#0" expanded="false" />
             <element signature="method#on#2;class#NovaEventLoop#0" expanded="false" />
             <element signature="method#once#0;class#NovaEventLoop#0" expanded="false" />
+            <element signature="method#once#1;class#NovaEventLoop#0" expanded="false" />
+            <element signature="method#once#2;class#NovaEventLoop#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+          <folding>
+            <element signature="e#293#320#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/FtcCommon-release-sources.jar!/com/qualcomm/ftccommon/ClassManagerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/internal/opmode/ClassManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="65" column="13" lean-forward="false" selection-start-line="65" selection-start-column="13" selection-end-line="65" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/Acceleration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="39" column="13" lean-forward="false" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/AngularVelocity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-318">
+          <caret line="48" column="13" lean-forward="false" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/navigation/DistanceUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="39" column="12" lean-forward="false" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/internal/vuforia/VuforiaLocalizerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="111" column="13" lean-forward="false" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/async/EventEmitterImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="23" column="43" lean-forward="true" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
