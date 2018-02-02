@@ -8,7 +8,10 @@ package org.chathamrobotics.nova.async;
  * @Last Modified time: 2/1/2018
  */
 
-
+/**
+ * A object that allows for listener to be registered for events
+ * @param <E>   the type used to denote events
+ */
 @SuppressWarnings("unused")
 public interface EventEmitter<E> {
     /**
