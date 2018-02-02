@@ -61,18 +61,18 @@ public class EventLoop {
      * @see Listener
      * @param condition the condition to test
      * @param handler   the handler for when the condition is met
-     * @return          whether or not the add was successful
+     * @return          the listener. Null if was unsuccessful
      */
-    public boolean addListener(@NonNull Listener.Condition condition, @NonNull Runnable handler) {
+    public Listener addListener(@NonNull Listener.Condition condition, @NonNull Runnable handler) {
         return addListener(new Listener(condition, handler));
     }
 
     /**
      * Adds a listener to te event loop
      * @param listener  the listener
-     * @return          whether or not the add was successful
+     * @return          the listener. Null if was unsuccessful
      */
-    public boolean addListener(@NonNull Listener listener) {
+    public Listener addListener(@NonNull Listener listener) {
         boolean result;
 
         result = listeners.add(listener);
@@ -80,7 +80,7 @@ public class EventLoop {
 
         startPolling();
 
-        return result;
+        return result ? listener : null;
     }
 
     /**
