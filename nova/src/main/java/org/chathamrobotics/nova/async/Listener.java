@@ -8,6 +8,8 @@ package org.chathamrobotics.nova.async;
  * @Last Modified time: 2/1/2018
  */
 
+import android.support.annotation.NonNull;
+
 /**
  * Listens for given condition and then calls the handler when it is met
  */
@@ -32,7 +34,7 @@ public class Listener {
      * @param condition the condition to listen for
      * @param handler   the handler for when the condition is met
      */
-    public Listener(Condition condition, Runnable handler) {
+    public Listener(@NonNull Condition condition, @NonNull Runnable handler) {
         this.condition = condition;
         this.handler = handler;
     }

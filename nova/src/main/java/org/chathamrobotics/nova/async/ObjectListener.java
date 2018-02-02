@@ -8,6 +8,8 @@ package org.chathamrobotics.nova.async;
  * @Last Modified time: 2/1/2018
  */
 
+import android.support.annotation.NonNull;
+
 /**
  * Listens for conditions pertaining to a object
  * @param <T>   the type of the object
@@ -28,7 +30,7 @@ public class ObjectListener<T> extends Listener {
      * @param condition the condition to test
      * @param handler   the handler to be called when the condition is met
      */
-    public ObjectListener(final T object, final Condition<T> condition, Runnable handler) {
+    public ObjectListener(@NonNull final T object, @NonNull final Condition<T> condition, @NonNull Runnable handler) {
         super(new Listener.Condition() {
             @Override
             public boolean test() {

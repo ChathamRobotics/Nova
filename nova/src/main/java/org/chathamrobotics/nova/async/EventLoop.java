@@ -9,6 +9,7 @@ package org.chathamrobotics.nova.async;
  */
 
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.util.Collections;
@@ -62,7 +63,7 @@ public class EventLoop {
      * @param handler   the handler for when the condition is met
      * @return          whether or not the add was successful
      */
-    public boolean addListener(Listener.Condition condition, Runnable handler) {
+    public boolean addListener(@NonNull Listener.Condition condition, @NonNull Runnable handler) {
         return addListener(new Listener(condition, handler));
     }
 
@@ -71,7 +72,7 @@ public class EventLoop {
      * @param listener  the listener
      * @return          whether or not the add was successful
      */
-    public boolean addListener(Listener listener) {
+    public boolean addListener(@NonNull Listener listener) {
         boolean result;
 
         result = listeners.add(listener);
@@ -95,7 +96,7 @@ public class EventLoop {
      * @param listener  the listener
      * @return          the removed listener. Null if unsuccessful.
      */
-    public Listener removeListener(Listener listener) {
+    public Listener removeListener(@NonNull Listener listener) {
        boolean result = listeners.remove(listener);
        Log.d(tag, "Removed Listener (" + listener + ")");
        return result ? listener : null;
