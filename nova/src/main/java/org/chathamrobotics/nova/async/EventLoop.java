@@ -18,11 +18,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * A external event loop that operates in it's own thread
+ * A external event loop that operates in it's own thread. The event loop will only run if it has
+ * listeners registered to it.
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class EventLoop {
     public static final String TAG = EventLoop.class.getSimpleName();
+
+    protected String tag = TAG;
 
     private final ConcurrentHashMap<Object, List<Listener>> listeners = new ConcurrentHashMap<>();
 
@@ -44,10 +47,22 @@ public class EventLoop {
 
                 if (listeners.isEmpty()) break;
             }
+
+            Log.d(tag, "Stopping polling thread");
         }
     };
 
     private Thread pollingThread;
+
+    /**
+     * Stops the event loop thread.
+     * Note: it will start again if addListener() is called
+     */
+    public void stop() {
+        Thread cache = pollingThread;
+        pollingThread = null;
+        cache.interrupt();
+    }
 
     /**
      * Adds a listener to the event loop
@@ -79,7 +94,7 @@ public class EventLoop {
         }
 
         result = tListeners.add(listener);
-        if (result) Log.d(TAG, "Added listener on " + key);
+        if (result) Log.d(tag, "Added listener on " + key);
 
         startPolling();
 
@@ -91,7 +106,7 @@ public class EventLoop {
      */
     public void removeAllListeners() {
         listeners.clear();
-        Log.d(TAG, "removed all listeners");
+        Log.d(tag, "removed all listeners");
     }
 
     /**
@@ -102,7 +117,7 @@ public class EventLoop {
      */
     public <T> List<Listener> removeAllListeners(T key) {
         List<Listener> result = listeners.remove(key);
-        Log.d(TAG, "removed all listeners for " + key);
+        Log.d(tag, "removed all listeners for " + key);
         return result;
     }
 
@@ -115,7 +130,7 @@ public class EventLoop {
      */
     public <T> Listener<T> removeListener(T key, Listener<T> listener) {
        boolean result = listeners.get(key).remove(listener);
-       Log.d(TAG, "Removed " + listener + " from " + key);
+       Log.d(tag, "Removed " + listener + " from " + key);
        return result ? listener : null;
     }
 
@@ -123,10 +138,10 @@ public class EventLoop {
         //noinspection ConstantConditions
         if (pollingLoop != null && pollingThread.isAlive()) return;
 
-        pollingThread = new Thread(pollingThread, TAG);
+        pollingThread = new Thread(pollingThread, tag);
         pollingThread.setDaemon(true);
 
-        Log.d(TAG, "Starting polling loop thread");
+        Log.d(tag, "Starting polling loop thread");
 
         pollingThread.start();
     }
