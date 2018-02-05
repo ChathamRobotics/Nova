@@ -20,7 +20,7 @@ import java.util.List;
  * A external event loop that operates in it's own thread. The event loop will only run if it has
  * listeners registered to it.
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class EventLoop {
     public static final String TAG = EventLoop.class.getSimpleName();
 
@@ -37,6 +37,7 @@ public class EventLoop {
                 for (Listener listener : listeners)
                     listener.run();
 
+                // exit thread if there are no more listeners
                 if (listeners.isEmpty()) break;
             }
 
@@ -51,6 +52,7 @@ public class EventLoop {
      * Note: it will start again if addListener() is called
      */
     public void stop() {
+        // stop thread and give it a chance to close gracefully
         Thread cache = pollingThread;
         pollingThread = null;
         cache.interrupt();
@@ -80,6 +82,7 @@ public class EventLoop {
 
         startPolling();
 
+        // only return the listener if the add was successful
         return result ? listener : null;
     }
 
