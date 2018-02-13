@@ -11,13 +11,16 @@ package org.chathamrobotics.nova.robot;
 
 import android.support.annotation.NonNull;
 
+import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+import java.util.Locale;
 
 /**
  * Handles logging for the robot
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-public class RobotLogger {
+public class RobotLogger implements Telemetry {
     ///// CONSTANTS /////
 
     ///// STATICS /////
@@ -70,14 +73,14 @@ public class RobotLogger {
      * @param tag       the tag to log under
      * @param telemetry the telemetry for the opmode
      */
-    public RobotLogger(String tag, Telemetry telemetry) {
+    public RobotLogger(@NonNull String tag, @NonNull Telemetry telemetry) {
         this.tag = tag;
         this.telemetry = telemetry;
         this.parent = null;
     }
 
     // for sub loggers
-    private RobotLogger(String tag, RobotLogger parent) {
+    private RobotLogger(@NonNull String tag, @NonNull RobotLogger parent) {
         this.tag = tag;
         this.telemetry = null;
         this.parent = parent;
@@ -85,6 +88,72 @@ public class RobotLogger {
 
     ///// ASSESSORS /////
 
+    // TELEMETRY METHODS
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public void setMsTransmissionInterval(int msTransmissionInterval) {
+        getTelemetry().setMsTransmissionInterval(msTransmissionInterval);
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public int getMsTransmissionInterval() {
+        return getTelemetry().getMsTransmissionInterval();
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public void setItemSeparator(String itemSeparator) {
+        getTelemetry().setItemSeparator(itemSeparator);
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public String getItemSeparator() {
+        return getTelemetry().getItemSeparator();
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public void setCaptionValueSeparator(String captionValueSeparator) {
+        getTelemetry().setCaptionValueSeparator(captionValueSeparator);
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public String getCaptionValueSeparator() {
+        return getTelemetry().getCaptionValueSeparator();
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public void setAutoClear(boolean autoClear) {
+        getTelemetry().setAutoClear(autoClear);
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public boolean isAutoClear() {
+        return getTelemetry().isAutoClear();
+    }
+
+    // ROBOT LOGGER METHODS
     /**
      * Sets the level for the telemetry output. If any messages are logged below the specified level
      * they will not be output to the telemetry.
@@ -118,6 +187,122 @@ public class RobotLogger {
 
     ///// BEHAVIOR /////
 
+    // TELEMETRY METHODS
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public Item addData(String caption, Object value) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public Item addData(String caption, String format, Object... args) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public <T> Item addData(String caption, String format, Func<T> valueProducer) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public <T> Item addData(String caption, Func<T> valueProducer) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public Object addAction(Runnable action) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public Line addLine() {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public Line addLine(String lineCaption) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public boolean removeAction(Object token) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public boolean removeItem(Item item) {
+        // TODO
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public boolean removeLine(Line line) {
+        // TODO
+    }
+
+    /**
+     * NOTE: Only clears telemetry
+     * @see Telemetry
+     */
+    @Override
+    public void clear() {
+        getTelemetry().clear();
+    }
+
+    /**
+     * NOTE: Only clears telemetry
+     * @see Telemetry
+     */
+    @Override
+    public void clearAll() {
+        getTelemetry().clearAll();
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public Log log() {
+        return getTelemetry().log();
+    }
+
+    /**
+     * @see Telemetry
+     */
+    @Override
+    public boolean update() {
+        return getTelemetry().update();
+    }
+
+    // ROBOT LOGGER METHODS
     /**
      * Creates a child logger. A logger that will log through it's parent but will have a unique tag
      * @param tag   the tag for the child logger
@@ -126,12 +311,4 @@ public class RobotLogger {
     public RobotLogger childLogger(@NonNull String tag) {
         return new RobotLogger(tag, this);
     }
-
-    public void update() {
-        if (parent != null) parent.update();
-        else if (telemetry != null) telemetry.update();
-    }
-
-    // DEBUG
-
 }

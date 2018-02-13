@@ -90,13 +90,12 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="RobotCore-release-" level="project" />
-    <orderEntry type="library" exported="" name="WirelessP2p-release-" level="project" />
-    <orderEntry type="library" exported="" name="Analytics-release-" level="project" />
-    <orderEntry type="library" exported="" name="Inspection-release-" level="project" />
-    <orderEntry type="library" exported="" name="Blocks-release-" level="project" />
-    <orderEntry type="library" exported="" name="Hardware-release-" level="project" />
-    <orderEntry type="library" exported="" name="FtcCommon-release-" level="project" />
-    <orderEntry type="library" exported="" name="android-android-23" level="project" />
+    <orderEntry type="library" exported="" name="Analytics-release:@aar" level="project" />
+    <orderEntry type="library" exported="" name="WirelessP2p-release:@aar" level="project" />
+    <orderEntry type="library" exported="" name="RobotCore-release:@aar" level="project" />
+    <orderEntry type="library" exported="" name="Hardware-release:@aar" level="project" />
+    <orderEntry type="library" exported="" name="FtcCommon-release:@aar" level="project" />
+    <orderEntry type="library" exported="" name="Blocks-release:@aar" level="project" />
+    <orderEntry type="library" exported="" name="Inspection-release:@aar" level="project" />
   </component>
 </module>
