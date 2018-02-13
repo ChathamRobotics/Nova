@@ -63,6 +63,7 @@ public class RobotLogger implements Telemetry {
     private final RobotLogger parent;
 
     private Level teleLevel;
+    private Level defaultTeleLevel;
 
 
     ///// CONSTRUCTORS /////
@@ -193,7 +194,7 @@ public class RobotLogger implements Telemetry {
      */
     @Override
     public Item addData(String caption, Object value) {
-        // TODO
+        return output(defaultTeleLevel, caption, value);
     }
 
     /**
@@ -201,7 +202,7 @@ public class RobotLogger implements Telemetry {
      */
     @Override
     public Item addData(String caption, String format, Object... args) {
-        // TODO
+        return output(defaultTeleLevel, caption, format, args);
     }
 
     /**
@@ -209,7 +210,7 @@ public class RobotLogger implements Telemetry {
      */
     @Override
     public <T> Item addData(String caption, String format, Func<T> valueProducer) {
-        // TODO
+        return output(defaultTeleLevel, caption, format, valueProducer);
     }
 
     /**
@@ -217,7 +218,7 @@ public class RobotLogger implements Telemetry {
      */
     @Override
     public <T> Item addData(String caption, Func<T> valueProducer) {
-        // TODO
+        return output(defaultTeleLevel, caption, valueProducer);
     }
 
     /**
@@ -310,5 +311,21 @@ public class RobotLogger implements Telemetry {
      */
     public RobotLogger childLogger(@NonNull String tag) {
         return new RobotLogger(tag, this);
+    }
+
+    private Item output(Level level, String caption, Object value) {
+
+    }
+
+    private Item output(Level level, String caption, String format, Object... args) {
+
+    }
+
+    private <T> Item output(Level level, String caption, Func<T> valueProducer) {
+
+    }
+
+    private <T> Item output(Level level, String caption, String format, Func<T> valueProducer) {
+
     }
 }

@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/robot/RobotLogger.java" line="282" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/robot/RobotLogger.java" line="281" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff747fdf-8d3c-4c9e-a992-bf30ea94a947" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules/nova/nova.iml" afterPath="$PROJECT_DIR$/.idea/modules/nova/nova.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/robot/RobotLogger.java" afterPath="$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/robot/RobotLogger.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -53,7 +45,7 @@
         <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/robot/RobotLogger.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="273">
-              <caret line="197" column="20" lean-forward="false" selection-start-line="197" selection-start-column="20" selection-end-line="197" selection-end-column="20" />
+              <caret line="315" column="59" lean-forward="false" selection-start-line="315" selection-start-column="59" selection-end-line="315" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="class#Level#0;class#RobotLogger#0" expanded="false" />
@@ -74,6 +66,10 @@
                 <element signature="method#removeAction#0;class#RobotLogger#0" expanded="false" />
                 <element signature="method#removeItem#0;class#RobotLogger#0" expanded="false" />
                 <element signature="method#removeLine#0;class#RobotLogger#0" expanded="false" />
+                <element signature="method#output#0;class#RobotLogger#0" expanded="false" />
+                <element signature="method#output#1;class#RobotLogger#0" expanded="false" />
+                <element signature="method#output#2;class#RobotLogger#0" expanded="false" />
+                <element signature="method#output#3;class#RobotLogger#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -82,12 +78,11 @@
       <file leaf-file-name="Telemetry.java" pinned="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/Telemetry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2458">
-              <caret line="502" column="7" lean-forward="true" selection-start-line="500" selection-start-column="4" selection-end-line="502" selection-end-column="7" />
+            <state relative-caret-position="-206">
+              <caret line="538" column="25" lean-forward="false" selection-start-line="538" selection-start-column="20" selection-end-line="538" selection-end-column="25" />
               <folding>
                 <element signature="class#Line#0;class#Telemetry#0" expanded="false" />
                 <element signature="docComment;method#addData#0;class#Line#0;class#Telemetry#0" expanded="false" />
-                <element signature="class#Log#0;class#Telemetry#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -96,7 +91,7 @@
       <file leaf-file-name="TelemetryImpl.java" pinned="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/internal/opmode/TelemetryImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1866">
+            <state relative-caret-position="-171">
               <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
               <folding>
                 <element signature="class#Value#0;class#TelemetryImpl#0" expanded="false" />
@@ -110,6 +105,10 @@
                 <element signature="method#getKey#0;class#TelemetryImpl#0" expanded="false" />
                 <element signature="method#tryUpdate#0;class#TelemetryImpl#0" expanded="false" />
                 <element signature="method#saveToTransmitter#0;class#TelemetryImpl#0" expanded="false" />
+                <element signature="method#removeItem#0;class#TelemetryImpl#0" expanded="false" />
+                <element signature="method#onAddData#0;class#TelemetryImpl#0" expanded="false" />
+                <element signature="method#clear#0;class#TelemetryImpl#0" expanded="false" />
+                <element signature="method#clearAll#0;class#TelemetryImpl#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -149,6 +148,7 @@
       <find>callback</find>
       <find>TAG</find>
       <find>teleme</find>
+      <find>capac</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -2389,7 +2389,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.328877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2468,7 +2468,6 @@
           <folding>
             <element signature="class#Line#0;class#Telemetry#0" expanded="false" />
             <element signature="docComment;method#addData#0;class#Line#0;class#Telemetry#0" expanded="false" />
-            <element signature="class#Log#0;class#Telemetry#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2489,6 +2488,10 @@
             <element signature="method#getKey#0;class#TelemetryImpl#0" expanded="false" />
             <element signature="method#tryUpdate#0;class#TelemetryImpl#0" expanded="false" />
             <element signature="method#saveToTransmitter#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#removeItem#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#onAddData#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#clear#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#clearAll#0;class#TelemetryImpl#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2532,6 +2535,10 @@
             <element signature="method#removeAction#0;class#RobotLogger#0" expanded="false" />
             <element signature="method#removeItem#0;class#RobotLogger#0" expanded="false" />
             <element signature="method#removeLine#0;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#0;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#1;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#2;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#3;class#RobotLogger#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2559,21 +2566,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/Telemetry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2458">
-          <caret line="502" column="7" lean-forward="true" selection-start-line="500" selection-start-column="4" selection-end-line="502" selection-end-column="7" />
-          <folding>
-            <element signature="class#Line#0;class#Telemetry#0" expanded="false" />
-            <element signature="docComment;method#addData#0;class#Line#0;class#Telemetry#0" expanded="false" />
-            <element signature="class#Log#0;class#Telemetry#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/internal/opmode/TelemetryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1866">
+        <state relative-caret-position="-171">
           <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
           <folding>
             <element signature="class#Value#0;class#TelemetryImpl#0" expanded="false" />
@@ -2587,6 +2582,21 @@
             <element signature="method#getKey#0;class#TelemetryImpl#0" expanded="false" />
             <element signature="method#tryUpdate#0;class#TelemetryImpl#0" expanded="false" />
             <element signature="method#saveToTransmitter#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#removeItem#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#onAddData#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#clear#0;class#TelemetryImpl#0" expanded="false" />
+            <element signature="method#clearAll#0;class#TelemetryImpl#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/RobotCore-release-sources.jar!/org/firstinspires/ftc/robotcore/external/Telemetry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-206">
+          <caret line="538" column="25" lean-forward="false" selection-start-line="538" selection-start-column="20" selection-end-line="538" selection-end-column="25" />
+          <folding>
+            <element signature="class#Line#0;class#Telemetry#0" expanded="false" />
+            <element signature="docComment;method#addData#0;class#Line#0;class#Telemetry#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2594,7 +2604,7 @@
     <entry file="file://$PROJECT_DIR$/nova/src/main/java/org/chathamrobotics/nova/robot/RobotLogger.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
-          <caret line="197" column="20" lean-forward="false" selection-start-line="197" selection-start-column="20" selection-end-line="197" selection-end-column="20" />
+          <caret line="315" column="59" lean-forward="false" selection-start-line="315" selection-start-column="59" selection-end-line="315" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="class#Level#0;class#RobotLogger#0" expanded="false" />
@@ -2615,6 +2625,10 @@
             <element signature="method#removeAction#0;class#RobotLogger#0" expanded="false" />
             <element signature="method#removeItem#0;class#RobotLogger#0" expanded="false" />
             <element signature="method#removeLine#0;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#0;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#1;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#2;class#RobotLogger#0" expanded="false" />
+            <element signature="method#output#3;class#RobotLogger#0" expanded="false" />
           </folding>
         </state>
       </provider>
