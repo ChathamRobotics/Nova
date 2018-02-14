@@ -13,7 +13,9 @@ import android.support.annotation.NonNull;
 
 import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.internal.opmode.TelemetryImpl;
 
+import java.util.LinkedList;
 import java.util.Locale;
 
 /**
@@ -59,8 +61,11 @@ public class RobotLogger implements Telemetry {
     ///// INSTANCE FIELDS /////
 
     private final String tag;
+    private final String androidLogTag;
     private final Telemetry telemetry;
     private final RobotLogger parent;
+
+    private final
 
     private Level teleLevel;
     private Level defaultTeleLevel;
@@ -76,6 +81,7 @@ public class RobotLogger implements Telemetry {
      */
     public RobotLogger(@NonNull String tag, @NonNull Telemetry telemetry) {
         this.tag = tag;
+        this.androidLogTag = tag;
         this.telemetry = telemetry;
         this.parent = null;
     }
@@ -83,6 +89,7 @@ public class RobotLogger implements Telemetry {
     // for sub loggers
     private RobotLogger(@NonNull String tag, @NonNull RobotLogger parent) {
         this.tag = tag;
+        this.androidLogTag = parent.tag + "/" + tag;
         this.telemetry = null;
         this.parent = parent;
     }
@@ -313,19 +320,71 @@ public class RobotLogger implements Telemetry {
         return new RobotLogger(tag, this);
     }
 
+    // output methods log to telemetry and android
     private Item output(Level level, String caption, Object value) {
+        logAndroid(level, formatMsg(caption, value));
+        if (! shouldLogTele(level)) return null;
 
+        caption = getTeleCap(level, caption);
+        return getTelemetry().addData(caption, value);
     }
 
     private Item output(Level level, String caption, String format, Object... args) {
+        logAndroid(level, formatMsg(caption, format, args));
+        if (! shouldLogTele(level)) return null;
 
+        caption = getTeleCap(level, caption);
+        return getTelemetry().addData(caption, format, args);
     }
 
-    private <T> Item output(Level level, String caption, Func<T> valueProducer) {
+    private <T> Item output(final Level level, String caption, final Func<T> valueProducer) {
+        caption = getTeleCap(level, caption);
 
+        // wrap value producer so that it only logs at right level;
+        return getTelemetry().addData(caption, new Func<T>() {
+            @Override
+            public T value() {
+                if (! shouldLogTele(level)) return null;
+
+                return valueProducer.value();
+            }
+        });
     }
 
-    private <T> Item output(Level level, String caption, String format, Func<T> valueProducer) {
+    private <T> Item output(final Level level, String caption, String format, final Func<T> valueProducer) {
+        caption = getTeleCap(level, caption);
 
+        Item item = getTelemetry().addData(caption, format, new Func<T>() {
+            @Override
+            public T value() {
+                if (! shouldLogTele(level)) return null;
+
+                return valueProducer.value();
+            }
+        });
+
+        return item;
+    }
+
+    private String getTeleCap(Level level, String currentCap) {
+        if (parent != null) return "(" + tag + "/" + level.name().toUpperCase() + ") " + currentCap;
+
+        return "(" + level + ") " + currentCap;
+    }
+
+    private boolean shouldLogTele(Level level) {
+        return level.priority >= teleLevel.priority;
+    }
+
+    private String formatMsg(String caption, Object value) {
+        return String.format(Locale.US, "%s%s%s", caption, getCaptionValueSeparator(), value.toString());
+    }
+
+    private String formatMsg(String caption, String format, Object... args) {
+        return formatMsg(caption, String.format(Locale.US, format, args));
+    }
+
+    private void logAndroid(Level level, String msg) {
+        android.util.Log.println(level.priority, androidLogTag, msg);
     }
 }
