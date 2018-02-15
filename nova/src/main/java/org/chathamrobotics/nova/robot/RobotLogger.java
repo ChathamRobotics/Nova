@@ -189,7 +189,7 @@ public class RobotLogger implements Telemetry {
      * @return  the telemetry used by the logger
      */
     public Telemetry getTelemetry() {
-        if (parent != null) return parent.telemetry;
+        if (parent != null) return parent.getTelemetry();
         return telemetry;
     }
 
