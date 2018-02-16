@@ -12,15 +12,38 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 /**
  * A immutable finite list
+ *
+ * Usage:
+ * <pre>{@code
+ *      Tuple t = new Tuple("key", 100, new Foo());
+ *
+ *      t.get(0); // returns "key"
+ *      t.get(1); // returns 100
+ *      t.get(2); // returns foo
+ * }</pre>
  */
-@SuppressWarnings("WeakerAccess")
-public abstract class Tuple implements Cloneable, Serializable, Iterable<Object> {
+@SuppressWarnings({"WeakerAccess", "unused"})
+public class Tuple implements Cloneable, Serializable, Iterable<Object> {
     protected final Object[] values;
+
+    /**
+     * Creates a new {@link Tuple}. This method is equivalent to {@code new Tuple(foo, bar)}, but
+     * can make to make code more readable.
+     *
+     * Example:
+     * <pre>{@code
+     *      myList.add(Tuple.with(foo, bar));
+     * }</pre>
+     *
+     * @param values    the values to add to the tuple
+     * @return          the tuple
+     */
+    public static Tuple with(Object ...values) {
+        return new Tuple(values);
+    }
 
     /**
      * Create new instance of {@link Tuple}
@@ -34,7 +57,11 @@ public abstract class Tuple implements Cloneable, Serializable, Iterable<Object>
      * Clones the tuple
      * @return  a copy of the tuple
      */
-    public abstract Tuple clone();
+    @SuppressWarnings("MethodDoesntCallSuperMethod")
+    @Override
+    public Tuple clone() {
+        return new Tuple(Arrays.copyOf(values, size()));
+    }
 
     /**
      * Returns the size of the tuple. eg. for a {@link Pair} the size would be 2
