@@ -19,6 +19,23 @@ import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class TupleTest {
+    public static class WithTest {
+        @Test
+        public void shouldCreateNewTuple() {
+            Tuple a = new Tuple(1, 2, 3);
+            Tuple b = Tuple.with(1, 2, 3);
+
+            assertTrue(a.equals(b));
+        }
+    }
+
+    public static class ConstructorTest {
+        @Test
+        public void shouldBeAbleToInstantiate() {
+            Tuple a = new Tuple(1, 2, 3);
+        }
+    }
+
     public static class CloneTest {
         @Test
         public void shouldClone() throws Exception {
