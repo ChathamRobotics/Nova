@@ -129,17 +129,17 @@ public class Controller extends Gamepad {
         this.gamepad = gamepad;
 
         // Set callback
-        try {
-            ClassModifier.setPrivateField(gamepad, "callback", new GamepadCallback() {
-                @Override
-                public void gamepadChanged(Gamepad gamepad) {
-                    update();
-                }
-            });
-        } catch (ClassModifier.FieldModificationException e) {
-            Log.w(TAG, "Failed to set callback on gamepad", e);
-            e.printStackTrace();
-        }
+//        try {
+//            ClassModifier.setPrivateField(gamepad, "callback", new GamepadCallback() {
+//                @Override
+//                public void gamepadChanged(Gamepad gamepad) {
+//                    update();
+//                }
+//            });
+//        } catch (ClassModifier.FieldModificationException e) {
+//            Log.w(TAG, "Failed to set callback on gamepad", e);
+//            e.printStackTrace();
+//        }
 
     }
 
