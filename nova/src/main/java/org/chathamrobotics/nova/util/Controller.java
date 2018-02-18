@@ -11,9 +11,16 @@ package org.chathamrobotics.nova.util;
 
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.robocol.RobocolParsable;
+
+import org.firstinspires.ftc.robotcore.internal.ui.GamepadUser;
+
+import java.lang.reflect.Field;
 
 /**
  * A utility wrapper for gamepad
@@ -42,6 +49,73 @@ public class Controller extends Gamepad {
          * When the button is not pressed
          */
         STATIONARY
+    }
+
+    /**
+     * Check whether or not the button is pressed
+     * @param state the button state
+     * @return      whether or not the button is pressed
+     */
+    public static boolean isPressed(ButtonState state) {
+        return state == ButtonState.TAPPED || state == ButtonState.HELD;
+    }
+
+    /**
+     * Check whether or not the button is pressed
+     * @param button    the button
+     * @return          whether or not the button is pressed
+     */
+    public static boolean isPressed(boolean button) {
+        return button;
+    }
+
+    /**
+     * Check whether or not the button is pressed
+     * @param button    the button
+     * @return          whether or not the button is pressed
+     */
+    public static boolean isPressed(float button) {
+        return Math.abs(button) > 1e-8;
+    }
+
+    /**
+     * Checks whether or not the button is tapped
+     * @see ButtonState
+     * @param state the button's state
+     * @return      whether or not the button is tapped
+     */
+    public static boolean isTapped(ButtonState state) {
+        return state == ButtonState.TAPPED;
+    }
+
+    /**
+     * Checks whether or not the button is held
+     * @see ButtonState
+     * @param state the button's state
+     * @return      whether or not the button is held
+     */
+    public static boolean isHeld(ButtonState state) {
+        return state == ButtonState.HELD;
+    }
+
+    /**
+     * Checks whether or not the button is stationary
+     * @see ButtonState
+     * @param state the button's state
+     * @return      whether or not the button is stationary
+     */
+    public static boolean isStationary(ButtonState state) {
+        return state == ButtonState.STATIONARY;
+    }
+
+    /**
+     * Checks whether or not the button is released
+     * @see ButtonState
+     * @param state the button's state
+     * @return      whether or not the button is released
+     */
+    public static boolean isReleased(ButtonState state) {
+        return state == ButtonState.RELEASED;
     }
 
     private final Gamepad gamepad;
@@ -127,24 +201,11 @@ public class Controller extends Gamepad {
      */
     public Controller(@NonNull Gamepad gamepad) {
         this.gamepad = gamepad;
-
-        // Set callback
-//        try {
-//            ClassModifier.setPrivateField(gamepad, "callback", new GamepadCallback() {
-//                @Override
-//                public void gamepadChanged(Gamepad gamepad) {
-//                    update();
-//                }
-//            });
-//        } catch (ClassModifier.FieldModificationException e) {
-//            Log.w(TAG, "Failed to set callback on gamepad", e);
-//            e.printStackTrace();
-//        }
-
     }
 
     /**
-     * Updates all of the controllers values to match the gamepad
+     * Updates all of the controllers values to match the gamepad. This should be called at the
+     * beginning of the loop
      */
     public void update() {
         try {
@@ -177,70 +238,99 @@ public class Controller extends Gamepad {
     }
 
     /**
-     * Check whether or not the button is pressed
-     * @param state the button state
-     * @return      whether or not the button is pressed
+     * @see Gamepad#update(KeyEvent)
      */
-    public boolean isPressed(ButtonState state) {
-        return state == ButtonState.TAPPED || state == ButtonState.HELD;
+    @Override
+    public void update(KeyEvent event) {
+        gamepad.update(event);
     }
 
     /**
-     * Check whether or not the button is pressed
-     * @param button    the button
-     * @return          whether or not the button is pressed
+     * @see Gamepad#update(MotionEvent)
      */
-    public boolean isPressed(boolean button) {
-        return button;
+    @Override
+    public void update(MotionEvent event) {
+        gamepad.update(event);
     }
 
     /**
-     * Check whether or not the button is pressed
-     * @param button    the button
-     * @return          whether or not the button is pressed
+     * @see Gamepad#setUser(GamepadUser)
      */
-    public boolean isPressed(float button) {
-        return Math.abs(button) < 1e-8;
+    @Override
+    public void setUser(GamepadUser user) {
+        gamepad.setUser(user);
     }
 
     /**
-     * Checks whether or not the button is tapped
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is tapped
+     * @see Gamepad#getUser()
      */
-    public boolean isTapped(ButtonState state) {
-        return state == ButtonState.TAPPED;
+    @Override
+    public GamepadUser getUser() {
+        return gamepad.getUser();
     }
 
     /**
-     * Checks whether or not the button is held
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is held
+     * @see Gamepad#setGamepadId(int)
      */
-    public boolean isHeld(ButtonState state) {
-        return state == ButtonState.HELD;
+    @Override
+    public void setGamepadId(int id) {
+        gamepad.setGamepadId(id);
     }
 
     /**
-     * Checks whether or not the button is stationary
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is stationary
+     * @see Gamepad#getGamepadId()
      */
-    public boolean isStationary(ButtonState state) {
-        return state == ButtonState.STATIONARY;
+    @Override
+    public int getGamepadId() {
+        return gamepad.getGamepadId();
     }
 
     /**
-     * Checks whether or not the button is released
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is released
+     * @see Gamepad#setTimestamp(long)
      */
-    public boolean isReleased(ButtonState state) {
-        return state == ButtonState.RELEASED;
+    @Override
+    public void setTimestamp(long timestamp) {
+        gamepad.setTimestamp(timestamp);
+    }
+
+    /**
+     * @see Gamepad#refreshTimestamp()
+     */
+    @Override
+    public void refreshTimestamp() {
+        gamepad.refreshTimestamp();
+    }
+
+    /**
+     * @see Gamepad#reset()
+     */
+    @Override
+    public void reset() {
+        gamepad.reset();
+    }
+
+    /**
+     * @see Gamepad#setJoystickDeadzone(float)
+     */
+    @Override
+    public void setJoystickDeadzone(float deadzone) {
+        gamepad.setJoystickDeadzone(deadzone);
+    }
+
+    /**
+     * @see Gamepad#getRobocolMsgType()
+     */
+    @Override
+    public MsgType getRobocolMsgType() {
+        return gamepad.getRobocolMsgType();
+    }
+
+    /**
+     * @see Gamepad#type()
+     */
+    @Override
+    public String type() {
+        return gamepad.type();
     }
 
     private ButtonState updateButtonState(boolean isPressed, ButtonState currentState) {
@@ -256,5 +346,17 @@ public class Controller extends Gamepad {
             return ButtonState.STATIONARY;
 
         return ButtonState.RELEASED;
+    }
+
+    private void setGamepadCallback(Gamepad gp, GamepadCallback callback) throws NoSuchFieldException, IllegalAccessException {
+        Field callbackField = Gamepad.class.getDeclaredField("callback");
+
+        try {
+            callbackField.setAccessible(true);
+
+            callbackField.set(gp, callback);
+        } finally {
+            callbackField.setAccessible(false);
+        }
     }
 }
