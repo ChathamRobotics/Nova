@@ -1,5 +1,7 @@
-package org.chathamrobotics.nova.util;
+package org.chathamrobotics.nova.util.tuple;
 
+import org.chathamrobotics.nova.util.tuple.Triplet;
+import org.chathamrobotics.nova.util.tuple.Tuple;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;

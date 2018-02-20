@@ -1,4 +1,4 @@
-package org.chathamrobotics.nova.util;
+package org.chathamrobotics.nova.util.tuple;
 
 /*!
  * Nova
