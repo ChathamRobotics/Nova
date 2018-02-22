@@ -1,34 +1,70 @@
 package org.chathamrobotics.nova.util.units;
 
+/*!
+ * Nova
+ * Copyright (c) 2017 Chatham Robotics
+ * MIT License
+ * @Last Modified by: storm
+ * @Last Modified time: 2/22/2018
+ */
 
-import org.firstinspires.ftc.robotcore.internal.system.AppUtil;
-
+@SuppressWarnings({"unused", "WeakerAccess"})
 public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
     REVOLUTIONS_PER_MINUTE,
     REVOLUTIONS_PER_SECOND,
     RADIANS_PER_SECOND,
     DEGREES_PER_SECOND;
 
+    /**
+     * Converts the value from the current unit to revolutions per minute
+     * @param value the value to convert
+     * @return      the converted value
+     */
     public double toRPM(double value) {
         return toRevolutionsPerMinute(value);
     }
 
+    /**
+     * Converts the value from the current unit to revolutions per minute
+     * @param value the value to convert
+     * @return      the converted value
+     */
     public double toRevolutionsPerMinute(double value) {
         return convertTo(REVOLUTIONS_PER_MINUTE, value);
     }
 
+    /**
+     * Converts the value from the current unit to revolutions per second
+     * @param value the value to convert
+     * @return      the converted value
+     */
     public double toHertz(double value) {
         return toRevolutionsPerSecond(value);
     }
 
+    /**
+     * Converts the value from the current unit to revolutions per second
+     * @param value the value to convert
+     * @return      the converted value
+     */
     public double toRevolutionsPerSecond(double value) {
         return convertTo(REVOLUTIONS_PER_SECOND, value);
     }
 
+    /**
+     * Converts the value from the current unit to radians per second
+     * @param value the value to convert
+     * @return      the converted value
+     */
     public double toRadiansPerSecond(double value) {
         return convertTo(RADIANS_PER_SECOND, value);
     }
 
+    /**
+     * Converts the value from the current unit to degrees per second
+     * @param value the value to convert
+     * @return      the converted value
+     */
     public double toDegreesPerSecond(double value) {
         return convertTo(DEGREES_PER_SECOND, value);
     }
