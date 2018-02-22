@@ -7,15 +7,24 @@ import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.configuration.MotorConfigurationType;
+import com.qualcomm.robotcore.util.Range;
 
+import org.chathamrobotics.nova.util.units.AngularVelocityUnit;
+
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class EncodedMotor implements DcMotor {
+
+    ////// FIELDS ///////
     private final DcMotor motor;
     private MotorConfigurationType type;
 
+    ////// CONSTRUCTORS ///////
     public EncodedMotor(@NonNull DcMotor motor) {
         this.motor = motor;
         this.type = motor.getMotorType();
     }
+
+    ////// ACCESSORS ///////
 
     /**
      * @see DcMotor
@@ -26,7 +35,66 @@ public class EncodedMotor implements DcMotor {
         motor.setMotorType(motorType);
     }
 
-    // pass through
+    /**
+     * Sets the motor's angular velocity. This will change the run mode to RUN_USING_ENCODERS
+     * @param velocity  the velocity to set in revolutions per minute
+     */
+    public void setVelocity(double velocity) {
+        setVelocity(velocity, AngularVelocityUnit.REVOLUTIONS_PER_MINUTE);
+    }
+
+    /**
+     * Sets the motor's angular velocity. This will change the run mode to RUN_USING_ENCODERS
+     * @param velocity  the velocity to set
+     * @param unit      the unit of measure for velocity
+     */
+    public void setVelocity(double velocity, AngularVelocityUnit unit) {
+        velocity = unit.toRPM(velocity);
+        Range.throwIfRangeIsInvalid(velocity, -type.getMaxRPM(), type.getMaxRPM());
+
+        setMode(RunMode.RUN_USING_ENCODER);
+        setPower(velocity / type.getMaxRPM());
+    }
+
+    /**
+     * Gets the motor's angular velocity
+     * @return  the motor's angular velocity in revolutions per minute
+     */
+    public double getVelocity() {
+        return getVelocity(AngularVelocityUnit.REVOLUTIONS_PER_MINUTE);
+    }
+
+    /**
+     * Gets the motor's angular velocity
+     *
+     * @param unit  the unit of measure to measure the velocity with
+     * @return      the motor's angular velocity
+     */
+    public double getVelocity(AngularVelocityUnit unit) {
+        RunMode runMode = getMode();
+
+        setMode(RunMode.RUN_USING_ENCODER);
+        double velocity = unit.fromRPM(motor.getPower() / type.getMaxRPM());
+
+        setMode(runMode);
+
+        return velocity;
+    }
+
+    ////// BEHAVIOUR ///////
+
+    /**
+     * Resets the encoders
+     */
+    public void reset() {
+        RunMode cache = getMode();
+
+        setMode(RunMode.STOP_AND_RESET_ENCODER);
+        setMode(cache);
+    }
+
+    ////// PASS ///////
+
     /**
      * @see DcMotor
      */

@@ -4,6 +4,7 @@ package org.chathamrobotics.nova.util.units;
  * Unit of a type of measurement. ie velocity
  * @param <U>   the units
  */
+@SuppressWarnings("unused")
 public interface Unit<U extends Unit> {
     /**
      * Converts a value from the current unit to the given unit

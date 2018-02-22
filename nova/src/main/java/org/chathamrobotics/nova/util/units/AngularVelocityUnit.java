@@ -25,12 +25,30 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
     }
 
     /**
+     * Converts the value from revolutions per minute to the current unit
+     * @param value the value to convert
+     * @return      the converted value
+     */
+    public double fromRPM(double value) {
+        return fromRevolutionsPerMinute(value);
+    }
+
+    /**
      * Converts the value from the current unit to revolutions per minute
      * @param value the value to convert
      * @return      the converted value
      */
     public double toRevolutionsPerMinute(double value) {
         return convertTo(REVOLUTIONS_PER_MINUTE, value);
+    }
+
+    /**
+     * Converts the value from revolutions per minute to the current unit
+     * @param value the value to convert
+     * @return      the converted value
+     */
+    public double fromRevolutionsPerMinute(double value) {
+        return convertFrom(REVOLUTIONS_PER_MINUTE, value);
     }
 
     /**
@@ -43,12 +61,30 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
     }
 
     /**
+     * Converts the value from revolutions per second to the current unit
+     * @param value the value to convert
+     * @return      the converted value
+     */
+    public double fromHertz(double value) {
+        return fromRevolutionsPerSecond(value);
+    }
+
+    /**
      * Converts the value from the current unit to revolutions per second
      * @param value the value to convert
      * @return      the converted value
      */
     public double toRevolutionsPerSecond(double value) {
         return convertTo(REVOLUTIONS_PER_SECOND, value);
+    }
+
+    /**
+     * Converts the value from revolutions per second to the current unit
+     * @param value the value to convert
+     * @return      the converted value
+     */
+    public double fromRevolutionsPerSecond(double value) {
+        return convertFrom(REVOLUTIONS_PER_SECOND, value);
     }
 
     /**
@@ -61,12 +97,30 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
     }
 
     /**
+     * Converts the value from radians per second to the current unit
+     * @param value the value to convert
+     * @return      the converted value
+     */
+    public double fromRadiansPerSecond(double value) {
+        return convertFrom(RADIANS_PER_SECOND, value);
+    }
+
+    /**
      * Converts the value from the current unit to degrees per second
      * @param value the value to convert
      * @return      the converted value
      */
     public double toDegreesPerSecond(double value) {
         return convertTo(DEGREES_PER_SECOND, value);
+    }
+
+    /**
+     * Converts the value from degrees per second to the current unit
+     * @param value the value to convert
+     * @return      the converted value
+     */
+    public double fromDegreesPerSecond(double value) {
+        return convertFrom(DEGREES_PER_SECOND, value);
     }
 
     /**
