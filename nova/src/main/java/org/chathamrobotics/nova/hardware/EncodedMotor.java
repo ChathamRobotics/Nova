@@ -80,8 +80,21 @@ public class EncodedMotor implements DcMotor {
         return velocity;
     }
 
+    /**
+     * Gets the heading of motor shaft (is position relative to 0) measured in revolutions
+     * @return  the heading of motor shaft
+     */
+    public double getHeading() {
+        return getHeading(AngleUnit.REVOLUTIONS);
+    }
+
+    /**
+     * Gets the heading of motor shaft (is position relative to 0)
+     * @param unit  the unit to measure heading with
+     * @return      the heading of motor shaft
+     */
     public double getHeading(@NonNull AngleUnit unit) {
-        return unit.fromDegrees(motor.getCurrentPosition() / type.getTicksPerRev() * 360);
+        return unit.fromRevolutions(motor.getCurrentPosition() / type.getTicksPerRev());
     }
 
     ////// BEHAVIOUR ///////
