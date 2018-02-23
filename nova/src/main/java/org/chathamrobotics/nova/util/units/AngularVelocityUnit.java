@@ -152,7 +152,7 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
                     case REVOLUTIONS_PER_SECOND:
                         return value / 360;
                     case RADIANS_PER_SECOND:
-                        return value * Math.PI / 180;
+                        return Math.toRadians(value);
                 }
             case RADIANS_PER_SECOND:
                 switch (unit) {
@@ -161,7 +161,7 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
                     case REVOLUTIONS_PER_SECOND:
                         return value / (2 * Math.PI);
                     case DEGREES_PER_SECOND:
-                        return value * 180 / Math.PI;
+                        return Math.toDegrees(value);
                 }
             case REVOLUTIONS_PER_MINUTE:
                 switch (unit) {

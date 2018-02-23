@@ -4,11 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
-import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.configuration.MotorConfigurationType;
 import com.qualcomm.robotcore.util.Range;
 
+import org.chathamrobotics.nova.util.units.AngleUnit;
 import org.chathamrobotics.nova.util.units.AngularVelocityUnit;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
@@ -48,7 +47,7 @@ public class EncodedMotor implements DcMotor {
      * @param velocity  the velocity to set
      * @param unit      the unit of measure for velocity
      */
-    public void setVelocity(double velocity, AngularVelocityUnit unit) {
+    public void setVelocity(double velocity, @NonNull AngularVelocityUnit unit) {
         velocity = unit.toRPM(velocity);
         Range.throwIfRangeIsInvalid(velocity, -type.getMaxRPM(), type.getMaxRPM());
 
@@ -70,7 +69,7 @@ public class EncodedMotor implements DcMotor {
      * @param unit  the unit of measure to measure the velocity with
      * @return      the motor's angular velocity
      */
-    public double getVelocity(AngularVelocityUnit unit) {
+    public double getVelocity(@NonNull AngularVelocityUnit unit) {
         RunMode runMode = getMode();
 
         setMode(RunMode.RUN_USING_ENCODER);
@@ -79,6 +78,10 @@ public class EncodedMotor implements DcMotor {
         setMode(runMode);
 
         return velocity;
+    }
+
+    public double getHeading(@NonNull AngleUnit unit) {
+        return unit.fromDegrees(motor.getCurrentPosition() / type.getTicksPerRev() * 360);
     }
 
     ////// BEHAVIOUR ///////
