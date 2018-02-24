@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.configuration.MotorConfigurationType;
 
+@SuppressWarnings("unused")
 public class EncodedMotor implements DcMotor {
     private final DcMotor motor;
     private MotorConfigurationType type;
