@@ -11,6 +11,7 @@ package org.chathamrobotics.nova.util;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.robocol.RobocolParsable;
 
@@ -23,7 +24,7 @@ import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class ControllerTest {
-    // TODO: write tests for passes to gamepad
+    // TODO: find way to suppress logs during test
 
     public static class ConstructorTest {
         @SuppressWarnings("unused")
@@ -34,8 +35,7 @@ public class ControllerTest {
     }
 
     public static class UpdateTest {
-        @Test
-        public void shouldCopyButtonValuesFromGamepad() {
+        @Test public void shouldCopyButtonValuesFromGamepad() {
             Gamepad gp = new Gamepad();
             Controller controller = new Controller(gp);
 
@@ -46,8 +46,7 @@ public class ControllerTest {
             assertEquals(controller.left_stick_x, gp.left_stick_x, 1e-10);
         }
 
-        @Test
-        public void shouldUpdateButtonStates() {
+        @Test public void shouldUpdateButtonStates() {
             Gamepad gp = new Gamepad();
             Controller controller = new Controller(gp);
 
@@ -56,6 +55,20 @@ public class ControllerTest {
             controller.update();
 
             assertEquals(controller.rightBumperState, Controller.ButtonState.TAPPED);
+        }
+
+        @Test public void shouldNotThrowOnFailedCopy() {
+            class Test extends Gamepad {
+                @Override
+                public byte[] toByteArray() throws RobotCoreException {
+                    throw  new RobotCoreException("THIS IS NOT A REAL ERROR");
+                }
+            }
+
+            Test gp = new Test();
+            Controller controller = new Controller(gp);
+
+            controller.update();
         }
     }
 
@@ -275,7 +288,23 @@ public class ControllerTest {
             assertTrue(gpTester.called);
         }
 
-        // TODO: test motion event update
+        @Test
+        public void shouldCallUpdateMotionEventOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void update(MotionEvent event) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.update(MotionEvent.obtain(1, 1, 1, 1, 1, 1));
+        }
 
         @Test
         public void shouldCallSetUserOnGamepad() {
