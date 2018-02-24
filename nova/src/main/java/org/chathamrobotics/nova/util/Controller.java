@@ -307,6 +307,7 @@ public class Controller extends Gamepad {
     @Override
     public void reset() {
         gamepad.reset();
+        update();
     }
 
     /**

@@ -8,8 +8,13 @@ package org.chathamrobotics.nova.util;
  * @Last Modified time: 2/18/2018
  */
 
-import com.qualcomm.robotcore.hardware.Gamepad;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 
+import com.qualcomm.robotcore.hardware.Gamepad;
+import com.qualcomm.robotcore.robocol.RobocolParsable;
+
+import org.firstinspires.ftc.robotcore.internal.ui.GamepadUser;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -247,6 +252,225 @@ public class ControllerTest {
             gp.x = true;
             controller.update();
             assertFalse(Controller.isHeld(controller.xState));
+        }
+    }
+
+    public static class PassThroughTest {
+        @Test
+        public void shouldCallUpdateKeyEventOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void update(KeyEvent event) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.update(new KeyEvent(0, 0));
+            assertTrue(gpTester.called);
+        }
+
+        // TODO: test motion event update
+
+        @Test
+        public void shouldCallSetUserOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void setUser(GamepadUser user) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.setUser(GamepadUser.ONE);
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallGetUserOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public GamepadUser getUser() {
+                    called = true;
+                    return super.getUser();
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.getUser();
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallSetGamepadIdOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void setGamepadId(int id) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.setGamepadId(1);
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallGetGamepadIdOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public int getGamepadId() {
+                    called = true;
+                    return super.getGamepadId();
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.getGamepadId();
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallSetTimestampOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void setTimestamp(long timestamp) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.setTimestamp(1000);
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallRefreshTimestampOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void refreshTimestamp() {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.refreshTimestamp();
+            assertTrue(gpTester.called);
+        }
+
+        // TODO: test that reset updates
+
+        @Test
+        public void shouldCallResetOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void reset() {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.reset();
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallSetJoystickDeadzoneOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void setJoystickDeadzone(float deadzone) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.setJoystickDeadzone(1);
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallGetRobocolMsgTypeOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public MsgType getRobocolMsgType() {
+                    called = true;
+                    return super.getRobocolMsgType();
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.getRobocolMsgType();
+            assertTrue(gpTester.called);
+        }
+
+        @Test
+        public void shouldCallTypeOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public String type() {
+                    called = true;
+                    return super.type();
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.type();
+            assertTrue(gpTester.called);
         }
     }
 }
