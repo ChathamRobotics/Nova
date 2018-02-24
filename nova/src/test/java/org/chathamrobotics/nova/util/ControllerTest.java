@@ -31,6 +31,7 @@ public class ControllerTest {
         @Test
         public void shouldCreateNewController() {
             Controller controller = new Controller(new Gamepad());
+            assertTrue(false);
         }
     }
 
