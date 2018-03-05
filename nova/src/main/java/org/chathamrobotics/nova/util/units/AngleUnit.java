@@ -19,6 +19,22 @@ public enum AngleUnit implements Unit<AngleUnit> {
     private static final double TWO_PI = 2 * Math.PI;
 
     /**
+     * Converts the given ftc unit angle to a nova unit angle
+     * @param unit  the ftc unit angle
+     * @return      the nova unit angle
+     */
+    public static AngleUnit fromFTCAngleUnit(org.firstinspires.ftc.robotcore.external.navigation.AngleUnit unit) {
+        switch (unit) {
+            case DEGREES:
+                return AngleUnit.DEGREES;
+            case RADIANS:
+                return AngleUnit.RADIANS;
+        }
+
+        throw new RuntimeException("Unreachable statement");
+    }
+
+    /**
      * Converts the given value from the current unit to radians
      * @param value the value to convert
      * @return      the converted value

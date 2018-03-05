@@ -307,6 +307,7 @@ public class Controller extends Gamepad {
     @Override
     public void reset() {
         gamepad.reset();
+        update();
     }
 
     /**
@@ -346,17 +347,5 @@ public class Controller extends Gamepad {
             return ButtonState.STATIONARY;
 
         return ButtonState.RELEASED;
-    }
-
-    private void setGamepadCallback(Gamepad gp, GamepadCallback callback) throws NoSuchFieldException, IllegalAccessException {
-        Field callbackField = Gamepad.class.getDeclaredField("callback");
-
-        try {
-            callbackField.setAccessible(true);
-
-            callbackField.set(gp, callback);
-        } finally {
-            callbackField.setAccessible(false);
-        }
     }
 }
