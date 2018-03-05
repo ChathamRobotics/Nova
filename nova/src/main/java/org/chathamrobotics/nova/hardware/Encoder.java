@@ -13,6 +13,10 @@ import org.chathamrobotics.nova.util.units.AngularVelocityUnit;
  */
 @SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue"})
 public class Encoder {
+    ////////// CONSTANTS ///////////
+    public final static AngularVelocityUnit DEFAULT_VELOCITY_UNIT = AngularVelocityUnit.REVOLUTIONS_PER_MINUTE;
+    public final static AngleUnit DEFAULT_HEADING_UNIT = AngleUnit.REVOLUTIONS;
+
     ////////// FIELDS ///////////
     private final DcMotor motor;
 
