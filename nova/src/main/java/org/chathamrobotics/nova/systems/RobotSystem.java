@@ -14,7 +14,7 @@ import org.chathamrobotics.nova.async.AsyncCallback;
  * A system on the robot eg. a drive train or lift
  */
 @SuppressWarnings("unused")
-public interface System {
+public interface RobotSystem {
     /**
      * Initializes the system
      * @param callback  called when the system is initialized
