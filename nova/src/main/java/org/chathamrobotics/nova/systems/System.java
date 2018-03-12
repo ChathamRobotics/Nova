@@ -22,10 +22,20 @@ public interface System {
     void init(AsyncCallback callback);
 
     /**
+     * Initializes the system
+     */
+    void init();
+
+    /**
      * Starts the system
      * @param callback  called when the system is running (successfully started)
      */
     void start(AsyncCallback callback);
+
+    /**
+     * Starts the system
+     */
+    void start();
 
     /**
      * Stops the system
