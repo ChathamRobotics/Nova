@@ -188,6 +188,15 @@ public class RobotLogger implements Telemetry {
     ////////// BEHAVIOR ////////////
 
     /**
+     * Creates a new child logger
+     * @param tag   the tag for the child logger
+     * @return      the child logger
+     */
+    public RobotLogger child(String tag) {
+        return new RobotLogger(tag, this);
+    }
+
+    /**
      * @see Telemetry#addData(String, String, Object...)
      */
     @Override
