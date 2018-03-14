@@ -1,4 +1,4 @@
-package org.chathamrobotics.nova.robot;
+package org.chathamrobotics.nova.util;
 
 import android.support.annotation.NonNull;
 
@@ -3076,7 +3076,7 @@ public class RobotLogger implements Telemetry {
         return null;
     }
 
-    private Item tOut(Level level, boolean retain, @NonNull String message) {
+    private Item tOut(Level level, boolean retain, String message) {
         if (shouldLog(level))
             return tLine(level).addData("", message).setRetained(retain);
 
