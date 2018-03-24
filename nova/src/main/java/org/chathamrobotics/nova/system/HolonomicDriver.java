@@ -1,0 +1,215 @@
+package org.chathamrobotics.nova.system;
+
+/*!
+ * Nova
+ * Copyright (c) 2017 Chatham Robotics
+ * MIT License
+ * @Last Modified by: storm
+ * @Last Modified time: 3/24/2018
+ */
+
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
+
+import org.chathamrobotics.nova.util.RobotLogger;
+import org.chathamrobotics.nova.util.units.AngleUnit;
+
+/**
+ * A holonomic driver setup in the following configuration:
+ * <p>
+ *     __    __
+ * FL |\\|  |//| FR
+ *    |__|  |__|
+ *     __    __
+ * BL |//|  |\\| BR
+ *    |__|  |__|
+ * </p>
+ */
+@SuppressWarnings({"unused", "WeakerAccess"})
+public class HolonomicDriver extends RobotSystemImpl {
+    public final static double MAX_POWER = 2;
+    public final static AngleUnit DEFAULT_DIRECTION_UNIT = AngleUnit.RADIANS;
+
+    public final static double FRONT_OFFSET = 0;
+    public final static double LEFT_OFFSET = Math.PI / 2;
+    public final static double BACK_OFFSET = Math.PI;
+    public final static double RIGHT_OFFSET = 3 * Math.PI / 2;
+
+    private final static double ROOT_TWO_OVER_FOUR = Math.sqrt(2) / 4;
+
+    private final DcMotor frontLeft, frontRight, backRight, backLeft;
+    private double offsetAngle = 0;
+
+    /**
+     * Creates a new instance of {@link HolonomicDriver}
+     * @param frontLeft     the front left motor
+     * @param frontRight    the front right motor
+     * @param backRight     the back right motor
+     * @param backLeft      the back left motor
+     * @param logger        the logger
+     */
+    public HolonomicDriver(
+            DcMotor frontLeft,
+            DcMotor frontRight,
+            DcMotor backRight,
+            DcMotor backLeft,
+            RobotLogger logger
+    ) {
+        super(logger);
+
+        this.frontLeft = frontLeft;
+        this.frontRight = frontRight;
+        this.backRight = backRight;
+        this.backLeft = backLeft;
+    }
+
+    /**
+     * Gets the offset angle
+     * @return  the offset angle
+     */
+    public double getOffsetAngle() {
+        return offsetAngle;
+    }
+
+    /**
+     * Sets the offset angle. This is used to make another side of the robot seem like the front
+     * @param offsetAngle   the offset angle in radians
+     */
+    public void setOffsetAngle(double offsetAngle) {
+        setOffsetAngle(offsetAngle, DEFAULT_DIRECTION_UNIT);
+    }
+
+    /**
+     * Sets the offset angle. This is used to make another side of the robot seem like the front
+     * @param offsetAngle   the offset angle
+     * @param unit          the unit of measure for the offset angle
+     */
+    public void setOffsetAngle(double offsetAngle, AngleUnit unit) {
+        this.offsetAngle = unit.toRadians(offsetAngle);
+    }
+
+    /**
+     * Gets the magnitude of all the motor's power. This is the vector sum of all the motor's powers
+     * pointed in the direction of the their holonomic wheel
+     * @return  the magnitude of all the motor's power
+     */
+    public double getPower() {
+        return Math.hypot(
+                -frontLeft.getPower() - frontRight.getPower() + backRight.getPower() + backLeft.getPower(), // x
+                frontLeft.getPower() - frontRight.getPower() - backRight.getPower() + backLeft.getPower()   // y
+        );
+    }
+
+    /**
+     * Gets the magnitude of all the motor's power. This is the vector sum of all the motor's powers
+     * pointed in the direction of the their holonomic wheel
+     * @param magnitude the magnitude of the power [-2, 2]
+     */
+    public void setPower(double magnitude) {
+        setPower(magnitude, 0, DEFAULT_DIRECTION_UNIT, 0);
+    }
+
+    /**
+     * Gets the magnitude of all the motor's power. This is the vector sum of all the motor's powers
+     * pointed in the direction of the their holonomic wheel
+     * @param magnitude the magnitude of the power [-2, 2]
+     * @param direction the direction of the power
+     * @param rotation  the rotation to perform [-1, 1] positive is to the right
+     */
+    public void setPower(double magnitude, double direction, double rotation) {
+        setPower(magnitude, direction, DEFAULT_DIRECTION_UNIT, rotation);
+    }
+
+    /**
+     * Gets the magnitude of all the motor's power. This is the vector sum of all the motor's powers
+     * pointed in the direction of the their holonomic wheel
+     * @param magnitude the magnitude of the power [-2, 2]
+     * @param direction the direction of the power
+     * @param unit      the unit of measure for the direction
+     * @param rotation  the rotation to perform [-1, 1] positive is to the right
+     */
+    public void setPower(double magnitude, double direction, AngleUnit unit, double rotation) {
+        Range.throwIfRangeIsInvalid(magnitude, -MAX_POWER, MAX_POWER);
+        Range.throwIfRangeIsInvalid(rotation, -1, 1);
+
+        direction = unit.toRadians(direction) + offsetAngle;
+
+        double a = ROOT_TWO_OVER_FOUR * magnitude;
+
+        double bl = a * (Math.cos(direction) + Math.sin(direction));
+        double br = a * (Math.cos(direction) - Math.sin(direction));
+        double fl = -br, fr = -bl;
+
+        fl += rotation;
+        fr += rotation;
+        br += rotation;
+        bl += rotation;
+
+        setMotorPowers(fl, fr, br, bl);
+    }
+
+    /**
+     * Initializes the holonomic driver
+     */
+    @Override
+    public void init() {
+        setState(State.INITIALIZED);
+    }
+
+    /**
+     * Starts the holonomic driver
+     */
+    @Override
+    public void start() {
+        preStart();
+        setState(State.RUNNING);
+    }
+
+    /**
+     * Stops the holonomic driver
+     */
+    @Override
+    public void stop() {
+        halt();
+        setState(State.STOPPED);
+    }
+
+    /**
+     * Stops the driver's movement
+     */
+    public void halt() {
+        setMotorPowers(0,0,0,0);
+    }
+
+    /**
+     * Drives the holonomic driver
+     * @param power     the power to drive with [-1, 1]
+     * @param direction the direction to drive
+     * @param rotation  the rotation to perform [-1, 1] positive is to the right
+     */
+    public void drive(double power, double direction, double rotation) {
+        drive(power, direction, DEFAULT_DIRECTION_UNIT, rotation);
+    }
+
+    /**
+     * Drives the holonomic driver
+     * @param power     the power to drive with [-1, 1]
+     * @param direction the direction to drive
+     * @param unit      the unit of measure for the direction
+     * @param rotation  the rotation to perform [-1, 1] positive is to the right
+     */
+    public void drive(double power, double direction, AngleUnit unit, double rotation) {
+        Range.throwIfRangeIsInvalid(power, -1, 1);
+        Range.throwIfRangeIsInvalid(rotation, -1, 1);
+
+        setPower(power * MAX_POWER, direction, unit, rotation);
+    }
+
+    private void setMotorPowers(double fl, double fr, double br, double bl) {
+        frontLeft.setPower(Range.clip(fl, -1, 1));
+        frontRight.setPower(Range.clip(fr, -1, 1));
+        backRight.setPower(Range.clip(br, -1, 1));
+        backLeft.setPower(Range.clip(bl, -1, 1));
+    }
+}
