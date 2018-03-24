@@ -28,6 +28,24 @@ abstract class RobotSystemImpl implements RobotSystem {
     }
 
     /**
+     * Checks whether or not the system is running
+     * @return  whether or not the system is running
+     */
+    @Override
+    public boolean isRunning() {
+        return state == State.RUNNING;
+    }
+
+    /**
+     * Checks whether or not the system is initialized
+     * @return  whether or not the system is initialized
+     */
+    @Override
+    public boolean isInitialized() {
+        return state == State.INITIALIZED || state == State.RUNNING;
+    }
+
+    /**
      * Gets the state of the system
      * @return  the state of the system
      */
