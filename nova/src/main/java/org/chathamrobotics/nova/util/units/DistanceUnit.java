@@ -26,7 +26,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
     MILE(FEET, 5280);
 
     private static final double METER_TO_FOOT = 3.28084;
-    private static final double MILE_TO_FOOT = 5280;
 
     private final DistanceUnit baseUnit;
     private final double toBaseFactor;
