@@ -48,7 +48,47 @@ public class Controller extends Gamepad {
         /**
          * When the button is not pressed
          */
-        STATIONARY
+        STATIONARY;
+
+        /**
+         * Checks whether or not the button is pressed
+         * @return  whether or not the button is pressed
+         */
+        public boolean isPressed() {
+            return this == TAPPED || this == HELD;
+        }
+
+        /**
+         * Checks whether or not the state is equal to tapped
+         * @return  whether or not the state is equal to tapped
+         */
+        public boolean isTapped() {
+            return this == TAPPED;
+        }
+
+        /**
+         * Checks whether or not the state is equal to released
+         * @return  whether or not the state is equal to released
+         */
+        public boolean isReleased() {
+            return this == RELEASED;
+        }
+
+        /**
+         * Checks whether or not the state is equal to held
+         * @return whether or not the state is equal to held
+         */
+        public boolean isHeld() {
+            return this == HELD;
+        }
+
+        /**
+         * Checks whether or not the state is equal to stationary
+         * @return whether or not the state is equal to stationary
+         */
+        public boolean isStationary() {
+            return this == STATIONARY;
+        }
     }
 
     /**
