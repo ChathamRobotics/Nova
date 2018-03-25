@@ -14,6 +14,8 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.chathamrobotics.nova.robot.Robot;
+import org.chathamrobotics.nova.robot.RobotConfiguration;
 import org.chathamrobotics.nova.util.RobotLogger;
 import org.chathamrobotics.nova.util.units.AngleUnit;
 
@@ -33,10 +35,6 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     /////////// CONSTANTS //////////////////
     public final static double MAX_POWER = 2;
     public final static AngleUnit DEFAULT_DIRECTION_UNIT = AngleUnit.RADIANS;
-    public final static String DEFAULT_FRONT_LEFT_NAME = "FrontLeftDrive";
-    public final static String DEFAULT_FRONT_RIGHT_NAME = "FrontRightDrive";
-    public final static String DEFAULT_BACK_RIGHT_NAME = "BackRightDrive";
-    public final static String DEFAULT_BACK_LEFT_NAME = "BackLeftDrive";
 
     public final static double FRONT_OFFSET = 0;
     public final static double LEFT_OFFSET = Math.PI / 2;
@@ -45,6 +43,58 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
 
     private final static double ROOT_TWO_OVER_FOUR = Math.sqrt(2) / 4;
     private final static String TAG = HolonomicDrive.class.getSimpleName();
+    private final static Configuration DEFAULT_CONF = new Configuration() {
+        @Override
+        public String getFLDriveMotorName() {
+            return "FrontLeftDrive";
+        }
+
+        @Override
+        public String getFRDriveMotorName() {
+            return "FrontRightDrive";
+        }
+
+        @Override
+        public String getBRDriveMotorName() {
+            return "BackRightDrive";
+        }
+
+        @Override
+        public String getBLDriveMotorName() {
+            return "BackLeftDrive";
+        }
+    };
+
+    /////////// INNER CLASSES ////////////////
+
+    /**
+     * The configuration for a holonomic drive system
+     */
+    public interface Configuration extends RobotConfiguration {
+        /**
+         * Gets the name of the front left drive motor
+         * @return  the name of the front left drive motor
+         */
+        String getFLDriveMotorName();
+
+        /**
+         * Gets the name of the front right drive motor
+         * @return  the name of the front right drive motor
+         */
+        String getFRDriveMotorName();
+
+        /**
+         * Gets the name of the back right drive motor
+         * @return  the name of the back right drive motor
+         */
+        String getBRDriveMotorName();
+
+        /**
+         * Gets the name of the back left drive motor
+         * @return  the name of the back left drive motor
+         */
+        String getBLDriveMotorName();
+    }
 
     /////////// CLASS METHODS //////////////
 
@@ -55,11 +105,22 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
      * @return              the built {@link HolonomicDrive}
      */
     public static HolonomicDrive build(HardwareMap hardwareMap, RobotLogger logger) {
+        return build(hardwareMap, logger, DEFAULT_CONF);
+    }
+
+    /**
+     * Builds a new instance of {@link HolonomicDrive}
+     * @param hardwareMap   the hardware map for the robot
+     * @param logger        the logger for the robot
+     * @param conf          the robot's configuration
+     * @return              the built {@link HolonomicDrive}
+     */
+    public static HolonomicDrive build(HardwareMap hardwareMap, RobotLogger logger, Configuration conf) {
         return new HolonomicDrive(
-                hardwareMap.dcMotor.get(DEFAULT_FRONT_LEFT_NAME),
-                hardwareMap.dcMotor.get(DEFAULT_FRONT_RIGHT_NAME),
-                hardwareMap.dcMotor.get(DEFAULT_BACK_RIGHT_NAME),
-                hardwareMap.dcMotor.get(DEFAULT_BACK_LEFT_NAME),
+                hardwareMap.dcMotor.get(conf.getFLDriveMotorName()),
+                hardwareMap.dcMotor.get(conf.getFRDriveMotorName()),
+                hardwareMap.dcMotor.get(conf.getBRDriveMotorName()),
+                hardwareMap.dcMotor.get(conf.getBLDriveMotorName()),
                 logger.child(TAG)
         );
     }

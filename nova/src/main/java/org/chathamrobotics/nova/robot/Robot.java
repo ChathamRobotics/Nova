@@ -1,4 +1,4 @@
-package org.chathamrobotics.nova;
+package org.chathamrobotics.nova.robot;
 
 /*!
  * Nova
