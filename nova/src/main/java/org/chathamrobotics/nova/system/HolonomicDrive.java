@@ -28,6 +28,7 @@ import org.chathamrobotics.nova.util.units.AngleUnit;
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
+    /////////// CONSTANTS //////////////////
     public final static double MAX_POWER = 2;
     public final static AngleUnit DEFAULT_DIRECTION_UNIT = AngleUnit.RADIANS;
 
@@ -38,9 +39,11 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
 
     private final static double ROOT_TWO_OVER_FOUR = Math.sqrt(2) / 4;
 
+    /////////// FIELDS /////////////////////
     private final DcMotor frontLeft, frontRight, backRight, backLeft;
     private double offsetAngle = 0;
 
+    /////////// CONSTRUCTORS ///////////////
     /**
      * Creates a new instance of {@link HolonomicDrive}
      * @param frontLeft     the front left motor
@@ -64,6 +67,7 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
         this.backLeft = backLeft;
     }
 
+    /////////// ACCESSORS //////////////////
     /**
      * Gets the offset angle
      * @return  the offset angle
@@ -160,6 +164,8 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
 
         setMotorPowers(fl, fr, br, bl);
     }
+
+    /////////// BEHAVIOR ///////////////////
 
     /**
      * Initializes the holonomic driver
