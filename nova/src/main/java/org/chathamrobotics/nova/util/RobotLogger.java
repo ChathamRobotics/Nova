@@ -51,137 +51,125 @@ public class RobotLogger implements Telemetry {
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param message   the message to log
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, String message) {
-            return log(level, false, message);
+        public Item log(String message) {
+            return log(false, message);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param message   the message to log
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, Throwable throwable, String message) {
-            return log(level, false, throwable, message);
+        public Item log(Throwable throwable, String message) {
+            return log(false, throwable, message);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param message   the message to log
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, boolean retain, String message) {
+        public Item log(boolean retain, String message) {
             return parent.log(level, retain, message);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param throwable the exception to log
          * @param message   the message to log
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, boolean retain, Throwable throwable, String message) {
+        public Item log(boolean retain, Throwable throwable, String message) {
             return parent.log(level, retain, throwable, message);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param caption   the message caption
          * @param value     the message value
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, String caption, Object value) {
-            return log(level, false, caption, value);
+        public Item log(String caption, Object value) {
+            return log(false, caption, value);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param caption   the message caption
          * @param value     the message value
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, Throwable throwable, String caption, Object value) {
-            return log(level, false, throwable, caption, value);
+        public Item log(Throwable throwable, String caption, Object value) {
+            return log(false, throwable, caption, value);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param caption   the message caption
          * @param value     the message value
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, boolean retain, String caption, Object value) {
+        public Item log(boolean retain, String caption, Object value) {
             return parent.log(level, retain, caption, value);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param throwable the exception to log
          * @param caption   the message caption
          * @param value     the message value
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, boolean retain, Throwable throwable, String caption, Object value) {
+        public Item log(boolean retain, Throwable throwable, String caption, Object value) {
             return parent.log(level, retain, throwable, caption, value);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param caption   the message caption
          * @param format    the message format
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, String caption, String format, Object... args) {
-            return log(level, false, caption, format, args);
+        public Item log(String caption, String format, Object... args) {
+            return log(false, caption, format, args);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param caption   the message caption
          * @param format    the message format
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, Throwable throwable, String caption, String format, Object... args) {
-            return log(level, false, throwable, caption, format, args);
+        public Item log(Throwable throwable, String caption, String format, Object... args) {
+            return log(false, throwable, caption, format, args);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param caption   the message caption
          * @param format    the message format
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, boolean retain, String caption, String format, Object... args) {
+        public Item log(boolean retain, String caption, String format, Object... args) {
             return parent.log(level, retain, caption, format, args);
         }
 
         /**
          * Logs out the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param throwable the exception to log
          * @param caption   the message caption
@@ -189,51 +177,47 @@ public class RobotLogger implements Telemetry {
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item log(Level level, boolean retain, Throwable throwable, String caption, String format, Object... args) {
+        public Item log(boolean retain, Throwable throwable, String caption, String format, Object... args) {
             return parent.log(level, retain, throwable, caption, format, args);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param caption       the message caption
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, Func)
          */
-        public <T> Item log(Level level, String caption, Func<T> valueProducer) {
-            return log(level, false, caption, valueProducer);
+        public <T> Item log(String caption, Func<T> valueProducer) {
+            return log(false, caption, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param throwable the exception to log
          * @param caption       the message caption
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, Func)
          */
-        public <T> Item log(Level level, Throwable throwable, String caption, Func<T> valueProducer) {
-            return log(level, false, throwable, caption, valueProducer);
+        public <T> Item log(Throwable throwable, String caption, Func<T> valueProducer) {
+            return log(false, throwable, caption, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param retain        whether or not to retain the log in telemetry
          * @param caption       the message caption
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, Func)
          */
-        public <T> Item log(Level level, boolean retain, String caption, Func<T> valueProducer) {
+        public <T> Item log(boolean retain, String caption, Func<T> valueProducer) {
             return parent.logf(level, retain, caption, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param retain        whether or not to retain the log in telemetry
          * @param throwable     the exception to log
          * @param caption       the message caption
@@ -241,26 +225,24 @@ public class RobotLogger implements Telemetry {
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, Func)
          */
-        public <T> Item log(Level level, boolean retain, Throwable throwable, String caption, Func<T> valueProducer) {
+        public <T> Item log(boolean retain, Throwable throwable, String caption, Func<T> valueProducer) {
             return parent.log(level, retain, throwable, caption, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param caption       the message caption
          * @param format        the message format
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, String, Func)
          */
-        public <T> Item log(Level level, String caption, String format,  Func<T> valueProducer) {
-            return log(level, false, caption, format, valueProducer);
+        public <T> Item log(String caption, String format,  Func<T> valueProducer) {
+            return log(false, caption, format, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param throwable     the exception to log
          * @param caption       the message caption
          * @param format        the message format
@@ -268,13 +250,12 @@ public class RobotLogger implements Telemetry {
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, String, Func)
          */
-        public <T> Item log(Level level, Throwable throwable, String caption, String format,  Func<T> valueProducer) {
-            return log(level, false, throwable, caption, format, valueProducer);
+        public <T> Item log(Throwable throwable, String caption, String format,  Func<T> valueProducer) {
+            return log(false, throwable, caption, format, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param retain        whether or not to retain the log in telemetry
          * @param caption       the message caption
          * @param format        the message format
@@ -282,114 +263,105 @@ public class RobotLogger implements Telemetry {
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, String, Func)
          */
-        public <T> Item log(Level level, boolean retain, String caption, String format,  Func<T> valueProducer) {
+        public <T> Item log(boolean retain, String caption, String format,  Func<T> valueProducer) {
             return parent.logf(level, retain, caption, format, valueProducer);
         }
 
         /**
          * Logs out the message
-         * @param level         the level to log at
          * @param retain        whether or not to retain the log in telemetry
-         * @param throwable the exception to log
+         * @param throwable     the exception to log
          * @param caption       the message caption
          * @param format        the message format
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, String, Func)
          */
-        public <T> Item log(Level level, boolean retain, Throwable throwable, String caption, String format,  Func<T> valueProducer) {
+        public <T> Item log(boolean retain, Throwable throwable, String caption, String format,  Func<T> valueProducer) {
             return  parent.log(level, retain, throwable, caption, format, valueProducer);
         }
 
         /**
          * Logs and formats the message
-         * @param level     the level to log at
          * @param format    the format of the message
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logf(Level level, String format, Object... args) {
-            return logf(level, false, format, args);
+        public Item logf(String format, Object... args) {
+            return logf(false, format, args);
         }
 
         /**
          * Logs and formats the message
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param format    the format of the message
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logf(Level level, Throwable throwable, String format, Object... args) {
-            return logf(level, false, throwable, format, args);
+        public Item logf(Throwable throwable, String format, Object... args) {
+            return logf(false, throwable, format, args);
         }
 
         /**
          * Logs and formats the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param format    the format of the message
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logf(Level level, boolean retain, String format, Object... args) {
-            return log(level, retain, String.format(format, args));
+        public Item logf(boolean retain, String format, Object... args) {
+            return log(retain, String.format(format, args));
         }
 
         /**
          * Logs and formats the message
-         * @param level     the level to log at
          * @param retain    whether or not to retain the log in telemetry
          * @param throwable the exception to log
          * @param format    the format of the message
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logf(Level level, boolean retain, Throwable throwable, String format, Object... args) {
-            return log(level, retain, throwable, String.format(format, args));
+        public Item logf(boolean retain, Throwable throwable, String format, Object... args) {
+            return log(retain, throwable, String.format(format, args));
         }
 
         /**
          * Logs and formats the message
-         * @param level         the level to log at
          * @param format        the format of the message
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see #log(Level, String, String, Func)
          */
-        public <T> Item logf(Level level, String format, Func<T> valueProducer) {
-            return logf(level, false, format, valueProducer);
+        public <T> Item logf(String format, Func<T> valueProducer) {
+            return logf(false, format, valueProducer);
         }
 
         /**
          * Logs and formats the message
-         * @param level         the level to log at
          * @param throwable     the exception to log
          * @param format        the format of the message
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see #log(Level, String, String, Func)
          */
-        public <T> Item logf(Level level, Throwable throwable, String format, Func<T> valueProducer) {
-            return logf(level, false, throwable, format, valueProducer);
+        public <T> Item logf(Throwable throwable, String format, Func<T> valueProducer) {
+            return logf(false, throwable, format, valueProducer);
         }
 
         /**
          * Logs and formats the message
-         * @param level         the level to log at
          * @param retain        whether or not to retain the log in telemetry
          * @param format        the format of the message
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see #log(Level, String, String, Func)
          */
-        public <T> Item logf(Level level, boolean retain, String format, Func<T> valueProducer) {
-            return log(level, retain, String.format(format, valueProducer.value()));
+        public <T> Item logf(boolean retain, String format, Func<T> valueProducer) {
+            return log(retain, String.format(format, valueProducer.value()));
         }
 
         /**
          * Logs and formats the message
-         * @param level         the level to log at
          * @param retain        whether or not to retain the log in telemetry
          * @param throwable the exception to log
          * @param format        the format of the message
@@ -397,120 +369,110 @@ public class RobotLogger implements Telemetry {
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see #log(Level, String, String, Func)
          */
-        public <T> Item logf(Level level, boolean retain, Throwable throwable, String format, Func<T> valueProducer) {
-            return log(level, retain, throwable, String.format(format, valueProducer.value()));
+        public <T> Item logf(boolean retain, Throwable throwable, String format, Func<T> valueProducer) {
+            return log(retain, throwable, String.format(format, valueProducer.value()));
         }
 
         /**
          * Logs out the message and retains it
-         * @param level     the level to log at
          * @param message   the message to log
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logr(Level level, String message) {
-            return log(level, true, message);
+        public Item logr(String message) {
+            return log(true, message);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param message   the message to log
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logr(Level level, Throwable throwable, String message) {
-            return log(level, true, throwable, message);
+        public Item logr(Throwable throwable, String message) {
+            return log(true, throwable, message);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level     the level to log at
          * @param caption   the message caption
          * @param value     the message value
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logr(Level level, String caption, Object value) {
-            return log(level, true, caption, value);
+        public Item logr(String caption, Object value) {
+            return log(true, caption, value);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param caption   the message caption
          * @param value     the message value
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logr(Level level, Throwable throwable, String caption, Object value) {
-            return log(level, true, throwable, caption, value);
+        public Item logr(Throwable throwable, String caption, Object value) {
+            return log(true, throwable, caption, value);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level     the level to log at
          * @param caption   the message caption
          * @param format    the message format
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logr(Level level, String caption, String format, Object... args) {
-            return log(level, true, caption, format, args);
+        public Item logr(String caption, String format, Object... args) {
+            return log(true, caption, format, args);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level     the level to log at
          * @param throwable the exception to log
          * @param caption   the message caption
          * @param format    the message format
          * @param args      the values to replace the format
          * @return          the telemetry item for the log. Null if not outputted to telemetry
          */
-        public Item logr(Level level, Throwable throwable, String caption, String format, Object... args) {
-            return log(level, true, throwable, caption, format, args);
+        public Item logr(Throwable throwable, String caption, String format, Object... args) {
+            return log(true, throwable, caption, format, args);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level         the level to log at
          * @param caption       the message caption
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, Func)
          */
-        public <T> Item logr(Level level, String caption, Func<T> valueProducer) {
-            return log(level, true, caption, valueProducer);
+        public <T> Item logr(String caption, Func<T> valueProducer) {
+            return log(true, caption, valueProducer);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level         the level to log at
          * @param throwable the exception to log
          * @param caption       the message caption
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, Func)
          */
-        public <T> Item logr(Level level, Throwable throwable, String caption, Func<T> valueProducer) {
-            return log(level, true, throwable, caption, valueProducer);
+        public <T> Item logr(Throwable throwable, String caption, Func<T> valueProducer) {
+            return log(true, throwable, caption, valueProducer);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level         the level to log at
          * @param caption       the message caption
          * @param format        the message format
          * @param valueProducer a function that produces a value
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, String, Func)
          */
-        public <T> Item logr(Level level, String caption, String format,  Func<T> valueProducer) {
-            return log(level, true, caption, format, valueProducer);
+        public <T> Item logr(String caption, String format,  Func<T> valueProducer) {
+            return log(true, caption, format, valueProducer);
         }
 
         /**
          * Logs out the message and retains it
-         * @param level         the level to log at
          * @param throwable     the exception to log
          * @param caption       the message caption
          * @param format        the message format
@@ -518,8 +480,8 @@ public class RobotLogger implements Telemetry {
          * @return              the telemetry item for the log. Null if not outputted to telemetry
          * @see Telemetry#addData(String, String, Func)
          */
-        public <T> Item logr(Level level, Throwable throwable, String caption, String format,  Func<T> valueProducer) {
-            return log(level, true, throwable, caption, format, valueProducer);
+        public <T> Item logr(Throwable throwable, String caption, String format,  Func<T> valueProducer) {
+            return log(true, throwable, caption, format, valueProducer);
         }
     }
 

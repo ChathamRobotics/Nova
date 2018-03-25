@@ -95,6 +95,8 @@ public class HolonomicDriver extends RobotSystemImpl {
      * @return  the magnitude of all the motor's power
      */
     public double getPower() {
+        confirmRunning("getPower");
+
         return Math.hypot(
                 -frontLeft.getPower() - frontRight.getPower() + backRight.getPower() + backLeft.getPower(), // x
                 frontLeft.getPower() - frontRight.getPower() - backRight.getPower() + backLeft.getPower()   // y
@@ -130,10 +132,20 @@ public class HolonomicDriver extends RobotSystemImpl {
      * @param rotation  the rotation to perform [-1, 1] positive is to the right
      */
     public void setPower(double magnitude, double direction, AngleUnit unit, double rotation) {
+        confirmRunning("setPower");
+
         Range.throwIfRangeIsInvalid(magnitude, -MAX_POWER, MAX_POWER);
         Range.throwIfRangeIsInvalid(rotation, -1, 1);
 
-        direction = unit.toRadians(direction) + offsetAngle;
+        logger.debug.log("magnitude", magnitude);
+        logger.debug.log("offset (rad)", offsetAngle);
+
+        direction = unit.toRadians(direction);
+        logger.debug.log("direction (rad)", direction);
+
+        direction += offsetAngle;
+        logger.debug.log("adjusted direction (rad)", direction);
+        logger.debug.log("rotation", rotation);
 
         double a = ROOT_TWO_OVER_FOUR * magnitude;
 
@@ -154,6 +166,7 @@ public class HolonomicDriver extends RobotSystemImpl {
      */
     @Override
     public void init() {
+        logger.debug.log("initializing");
         setState(State.INITIALIZED);
     }
 
@@ -163,6 +176,7 @@ public class HolonomicDriver extends RobotSystemImpl {
     @Override
     public void start() {
         preStart();
+        logger.debug.log("starting");
         setState(State.RUNNING);
     }
 
@@ -171,6 +185,8 @@ public class HolonomicDriver extends RobotSystemImpl {
      */
     @Override
     public void stop() {
+        logger.debug.log("stopping");
+
         halt();
         setState(State.STOPPED);
     }
@@ -200,13 +216,28 @@ public class HolonomicDriver extends RobotSystemImpl {
      * @param rotation  the rotation to perform [-1, 1] positive is to the right
      */
     public void drive(double power, double direction, AngleUnit unit, double rotation) {
+        confirmRunning("drive");
+
         Range.throwIfRangeIsInvalid(power, -1, 1);
         Range.throwIfRangeIsInvalid(rotation, -1, 1);
 
         setPower(power * MAX_POWER, direction, unit, rotation);
     }
 
+    /**
+     * Rotates the robot with the given power
+     * @param power the power at which to rotate the robot
+     */
+    public void rotate(double power) {
+        setPower(0, 0, power);
+    }
+
     private void setMotorPowers(double fl, double fr, double br, double bl) {
+        logger.verbose.log("front left power", fl);
+        logger.verbose.log("front right power", fr);
+        logger.verbose.log("back right power", br);
+        logger.verbose.log("back left power", bl);
+
         frontLeft.setPower(Range.clip(fl, -1, 1));
         frontRight.setPower(Range.clip(fr, -1, 1));
         backRight.setPower(Range.clip(br, -1, 1));

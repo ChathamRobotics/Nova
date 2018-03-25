@@ -62,4 +62,13 @@ abstract class RobotSystemImpl implements RobotSystem {
         if (this.state != State.INITIALIZED && this.state != State.RUNNING)
             throw new IllegalStateException("The system must be initialized before starting");
     }
+
+    protected void confirmRunning() {
+        confirmRunning("perform this operation");
+    }
+
+    protected void confirmRunning(String reason) {
+        if (this.state != State.RUNNING)
+            throw new IllegalStateException("The system must be running inorder to " + reason);
+    }
 }
