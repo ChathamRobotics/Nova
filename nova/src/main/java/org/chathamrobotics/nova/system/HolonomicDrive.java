@@ -10,7 +10,9 @@ package org.chathamrobotics.nova.system;
 
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.RobotLog;
 
 import org.chathamrobotics.nova.util.RobotLogger;
 import org.chathamrobotics.nova.util.units.AngleUnit;
@@ -31,6 +33,10 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     /////////// CONSTANTS //////////////////
     public final static double MAX_POWER = 2;
     public final static AngleUnit DEFAULT_DIRECTION_UNIT = AngleUnit.RADIANS;
+    public final static String DEFAULT_FRONT_LEFT_NAME = "FrontLeftDrive";
+    public final static String DEFAULT_FRONT_RIGHT_NAME = "FrontRightDrive";
+    public final static String DEFAULT_BACK_RIGHT_NAME = "BackRightDrive";
+    public final static String DEFAULT_BACK_LEFT_NAME = "BackLeftDrive";
 
     public final static double FRONT_OFFSET = 0;
     public final static double LEFT_OFFSET = Math.PI / 2;
@@ -38,6 +44,25 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     public final static double RIGHT_OFFSET = 3 * Math.PI / 2;
 
     private final static double ROOT_TWO_OVER_FOUR = Math.sqrt(2) / 4;
+    private final static String TAG = HolonomicDrive.class.getSimpleName();
+
+    /////////// CLASS METHODS //////////////
+
+    /**
+     * Builds a new instance of {@link HolonomicDrive} using the default names
+     * @param hardwareMap   the hardware map for the robot
+     * @param logger        the logger for the robot
+     * @return              the built {@link HolonomicDrive}
+     */
+    public static HolonomicDrive build(HardwareMap hardwareMap, RobotLogger logger) {
+        return new HolonomicDrive(
+                hardwareMap.dcMotor.get(DEFAULT_FRONT_LEFT_NAME),
+                hardwareMap.dcMotor.get(DEFAULT_FRONT_RIGHT_NAME),
+                hardwareMap.dcMotor.get(DEFAULT_BACK_RIGHT_NAME),
+                hardwareMap.dcMotor.get(DEFAULT_BACK_LEFT_NAME),
+                logger.child(TAG)
+        );
+    }
 
     /////////// FIELDS /////////////////////
     private final DcMotor frontLeft, frontRight, backRight, backLeft;
