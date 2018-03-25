@@ -126,7 +126,7 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     }
 
     /////////// FIELDS /////////////////////
-    private final DcMotor frontLeft, frontRight, backRight, backLeft;
+    protected final DcMotor frontLeft, frontRight, backRight, backLeft;
     private double offsetAngle = 0;
 
     /////////// CONSTRUCTORS ///////////////
@@ -237,18 +237,9 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
         logger.debug.log("adjusted direction (rad)", direction);
         logger.debug.log("rotation", rotation);
 
-        double a = ROOT_TWO_OVER_FOUR * magnitude;
+        double[] motorPowers = calcMotorValues(magnitude, direction, rotation);
 
-        double bl = a * (Math.cos(direction) + Math.sin(direction));
-        double br = a * (Math.cos(direction) - Math.sin(direction));
-        double fl = -br, fr = -bl;
-
-        fl += rotation;
-        fr += rotation;
-        br += rotation;
-        bl += rotation;
-
-        setMotorPowers(fl, fr, br, bl);
+        setMotorPowers(motorPowers[0], motorPowers[1], motorPowers[2], motorPowers[3]);
     }
 
     /////////// BEHAVIOR ///////////////////
@@ -330,6 +321,25 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
      */
     public void rotate(double power) {
         setPower(0, 0, power);
+    }
+
+    /**
+     * Calculates the motor values
+     * @param magnitude the magnitude of the vector
+     * @param direction the direction of the vector
+     * @param rotation  the rotation to perform
+     * @return          the motor values {fl, fr, br, bl}
+     */
+    protected double[] calcMotorValues(double magnitude, double direction, double rotation) {
+        double[] values = new double[4];
+        double a = ROOT_TWO_OVER_FOUR * magnitude;
+
+        values[2] = a * (Math.cos(direction) - Math.sin(direction)); // back right
+        values[3] = a * (Math.cos(direction) + Math.sin(direction)); // back left
+        values[0] = -values[2]; // front left
+        values[1] = -values[3]; // front right
+
+        return values;
     }
 
     private void setMotorPowers(double fl, double fr, double br, double bl) {
