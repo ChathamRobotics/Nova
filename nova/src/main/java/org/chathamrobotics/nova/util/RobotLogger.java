@@ -1349,28 +1349,28 @@ public class RobotLogger implements Telemetry {
     // HANDLING TELEMETRY OUTPUT
     private <T> Item tOut(Level level, boolean retain, Throwable throwable, String caption, Func<T> valueProducer) {
         if (shouldLog(level))
-            return tLine(level).addData(caption, valueProducer).setRetained(retain);
+            return tLine(level).addData(caption + getCaptionValueSeparator(), valueProducer).setRetained(retain);
 
         return null;
     }
 
     private <T> Item tOut(Level level, boolean retain, String caption, Func<T> valueProducer) {
         if (shouldLog(level))
-            return tLine(level).addData(caption, valueProducer).setRetained(retain);
+            return tLine(level).addData(caption + getCaptionValueSeparator(), valueProducer).setRetained(retain);
 
         return null;
     }
 
     private <T> Item tOut(Level level, boolean retain, String caption, String format, Func<T> valueProducer) {
         if (shouldLog(level))
-            return tLine(level).addData(caption, format, valueProducer).setRetained(retain);
+            return tLine(level).addData(caption + getCaptionValueSeparator(), format, valueProducer).setRetained(retain);
 
         return null;
     }
 
     private Item tOut(Level level, boolean retain, String caption, String format, Object... args) {
         if (shouldLog(level))
-            return tLine(level).addData(caption, format, args).setRetained(retain);
+            return tLine(level).addData(caption + getCaptionValueSeparator(), format, args).setRetained(retain);
 
         return null;
     }
@@ -1391,7 +1391,7 @@ public class RobotLogger implements Telemetry {
     }
 
     private Line tLine(Level level) {
-        return getTelemetry().addLine("(" + tag + "/" + level.name() + ")");
+        return getTelemetry().addLine("(" + tag + "/" + level.name() + ") ");
     }
 
     private boolean shouldLog(Level level) {
