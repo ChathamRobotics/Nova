@@ -239,9 +239,12 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
 
         double a = ROOT_TWO_OVER_FOUR * magnitude;
 
-        double bl = a * (Math.cos(direction) + Math.sin(direction));
-        double br = a * (Math.cos(direction) - Math.sin(direction));
-        double fl = -br, fr = -bl;
+//        double bl = a * (Math.cos(direction) + Math.sin(direction));
+//        double br = a * (Math.cos(direction) - Math.sin(direction));
+//        double fl = -br, fr = -bl;
+
+        double bl = a * (Math.sin(direction) + Math.cos(direction)), fr = -bl;
+        double br = a * (Math.cos(direction) - Math.sin(direction)), fl = -br;
 
         fl += rotation;
         fr += rotation;
