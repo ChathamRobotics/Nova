@@ -18,6 +18,8 @@ import org.firstinspires.ftc.robotcore.internal.ui.GamepadUser;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -34,6 +36,8 @@ public class ControllerTest {
         }
     }
 
+    @RunWith(RobolectricTestRunner.class)
+    @Config(manifest = Config.NONE)
     public static class UpdateTest {
         @Test public void shouldCopyButtonValuesFromGamepad() {
             Gamepad gp = new Gamepad();
@@ -57,19 +61,19 @@ public class ControllerTest {
             assertEquals(controller.rightBumperState, Controller.ButtonState.TAPPED);
         }
 
-//        @Test public void shouldNotThrowOnFailedCopy() {
-//            class Test extends Gamepad {
-//                @Override
-//                public byte[] toByteArray() throws RobotCoreException {
-//                    throw  new RobotCoreException("THIS IS NOT A REAL ERROR");
-//                }
-//            }
-//
-//            Test gp = new Test();
-//            Controller controller = new Controller(gp);
-//
-//            controller.update();
-//        }
+        @Test public void shouldNotThrowOnFailedCopy() {
+            class Test extends Gamepad {
+                @Override
+                public byte[] toByteArray() throws RobotCoreException {
+                    throw  new RobotCoreException("THIS IS NOT A REAL ERROR");
+                }
+            }
+
+            Test gp = new Test();
+            Controller controller = new Controller(gp);
+
+            controller.update();
+        }
     }
 
     public static class ButtonStateTest {
@@ -276,6 +280,8 @@ public class ControllerTest {
         }
     }
 
+    @RunWith(RobolectricTestRunner.class)
+    @Config(manifest = Config.NONE)
     public static class PassThroughTest {
         @Test
         public void shouldCallUpdateKeyEventOnGamepad() {
@@ -292,27 +298,28 @@ public class ControllerTest {
             Test gpTester = new Test();
             Controller controller = new Controller(gpTester);
 
-            controller.update(mock(KeyEvent.class));
+            controller.update(new KeyEvent(0,0));
             assertTrue(gpTester.called);
         }
-//        @Test
-//        public void shouldCallUpdateKeyEventOnGamepad() {
-//            @SuppressWarnings("WeakerAccess")
-//            class Test extends Gamepad {
-//                public boolean called;
-//
-//                @Override
-//                public void update(KeyEvent event) {
-//                    called = true;
-//                }
-//            }
-//
-//            Test gpTester = new Test();
-//            Controller controller = new Controller(gpTester);
-//
-//            controller.update(new KeyEvent(0, 0));
-//            assertTrue(gpTester.called);
-//        }
+
+        @Test
+        public void shouldCallUpdateMotionEventOnGamepad() {
+            @SuppressWarnings("WeakerAccess")
+            class Test extends Gamepad {
+                public boolean called;
+
+                @Override
+                public void update(MotionEvent event) {
+                    called = true;
+                }
+            }
+
+            Test gpTester = new Test();
+            Controller controller = new Controller(gpTester);
+
+            controller.update(MotionEvent.obtain(0,0,0,0,0,0));
+            assertTrue(gpTester.called);
+        }
 
         @Test
         public void shouldCallSetUserOnGamepad() {
