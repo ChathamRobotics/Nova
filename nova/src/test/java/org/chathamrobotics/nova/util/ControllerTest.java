@@ -295,15 +295,14 @@ public class ControllerTest {
             controller.update(mock(KeyEvent.class));
             assertTrue(gpTester.called);
         }
-
 //        @Test
-//        public void shouldCallUpdateMotionEventOnGamepad() {
+//        public void shouldCallUpdateKeyEventOnGamepad() {
 //            @SuppressWarnings("WeakerAccess")
 //            class Test extends Gamepad {
 //                public boolean called;
 //
 //                @Override
-//                public void update(MotionEvent event) {
+//                public void update(KeyEvent event) {
 //                    called = true;
 //                }
 //            }
@@ -311,7 +310,8 @@ public class ControllerTest {
 //            Test gpTester = new Test();
 //            Controller controller = new Controller(gpTester);
 //
-//            controller.update(mock(MotionEvent.class));
+//            controller.update(new KeyEvent(0, 0));
+//            assertTrue(gpTester.called);
 //        }
 
         @Test

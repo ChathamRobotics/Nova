@@ -12,9 +12,6 @@ package org.chathamrobotics.nova.system;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.util.RobotLog;
-
-import org.chathamrobotics.nova.robot.Robot;
 import org.chathamrobotics.nova.robot.RobotConfiguration;
 import org.chathamrobotics.nova.util.RobotLogger;
 import org.chathamrobotics.nova.util.units.AngleUnit;
@@ -23,10 +20,10 @@ import org.chathamrobotics.nova.util.units.AngleUnit;
  * A holonomic driver setup in the following configuration:
  * <p>
  *     __    __
- * FL |\\|  |//| FR
+ * FL |//|  |\\| FR
  *    |__|  |__|
  *     __    __
- * BL |//|  |\\| BR
+ * BL |\\|  |//| BR
  *    |__|  |__|
  * </p>
  */
@@ -41,7 +38,8 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     public final static double BACK_OFFSET = Math.PI;
     public final static double RIGHT_OFFSET = 3 * Math.PI / 2;
 
-    private final static double ROOT_TWO_OVER_FOUR = Math.sqrt(2) / 4;
+    private final static double ROOT_TWO_OVER_TWO = 1 / Math.sqrt(2);
+    private final static double ROOT_TWO_OVER_FOUR = ROOT_TWO_OVER_TWO / 2;
     private final static String TAG = HolonomicDrive.class.getSimpleName();
     private final static Configuration DEFAULT_CONF = new Configuration() {
         @Override
@@ -187,9 +185,9 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     public double getPower() {
         confirmRunning("getPower");
 
-        return Math.hypot(
-                -frontLeft.getPower() - frontRight.getPower() + backRight.getPower() + backLeft.getPower(), // x
-                frontLeft.getPower() - frontRight.getPower() - backRight.getPower() + backLeft.getPower()   // y
+        return ROOT_TWO_OVER_TWO * Math.hypot(
+                -frontLeft.getPower() - frontRight.getPower() + backRight.getPower() + backLeft.getPower(),
+                -frontLeft.getPower() + frontRight.getPower() + backRight.getPower() - backLeft.getPower()
         );
     }
 
@@ -227,15 +225,15 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
         Range.throwIfRangeIsInvalid(magnitude, -MAX_POWER, MAX_POWER);
         Range.throwIfRangeIsInvalid(rotation, -1, 1);
 
-        logger.debug.log("magnitude", magnitude);
-        logger.debug.log("offset (rad)", offsetAngle);
+        logger.debug.log("Magnitude", magnitude);
+        logger.debug.log("Direction Offset (rad)", offsetAngle);
 
         direction = unit.toRadians(direction);
-        logger.debug.log("direction (rad)", direction);
+        logger.debug.log("Direction (rad)", direction);
 
         direction += offsetAngle;
-        logger.debug.log("adjusted direction (rad)", direction);
-        logger.debug.log("rotation", rotation);
+        logger.debug.log("Adjusted direction (rad)", direction);
+        logger.debug.log("Rotation", rotation);
 
         double[] motorPowers = calcMotorValues(magnitude, direction, rotation);
 
@@ -334,10 +332,18 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
         double[] values = new double[4];
         double a = ROOT_TWO_OVER_FOUR * magnitude;
 
-        values[2] = a * (Math.cos(direction) - Math.sin(direction)); // back right
-        values[3] = a * (Math.cos(direction) + Math.sin(direction)); // back left
-        values[0] = -values[2]; // front left
-        values[1] = -values[3]; // front right
+        double br = a * (Math.sin(direction) + Math.cos(direction)), fl = -br;
+        double bl = a * (Math.cos(direction) - Math.sin(direction)), fr = -bl;
+
+        fl -= rotation;
+        fr -= rotation;
+        br -= rotation;
+        bl -= rotation;
+
+        values[0] = fl;
+        values[1] = fr;
+        values[2] = br;
+        values[3] = bl;
 
         return values;
     }
