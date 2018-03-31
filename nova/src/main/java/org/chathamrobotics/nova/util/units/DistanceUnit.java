@@ -61,24 +61,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      * @param value the value to convert
      * @return      the converted value
      */
-    public double toMM(double value) {
-        return toMillimeters(value);
-    }
-
-    /**
-     * Converts the value from millimeters to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromMM(double value) {
-        return fromMillimeters(value);
-    }
-
-    /**
-     * Converts the value to millimeters
-     * @param value the value to convert
-     * @return      the converted value
-     */
     public double toMillimeters(double value) {
         return convertTo(MILLIMETER, value);
     }
@@ -90,24 +72,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      */
     public double fromMillimeters(double value) {
         return convertFrom(MILLIMETER, value);
-    }
-
-    /**
-     * Converts the value to centimeters
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double toCM(double value) {
-        return toCentimeters(value);
-    }
-
-    /**
-     * Converts the value from centimeters to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromCM(double value) {
-        return fromCentimeters(value);
     }
 
     /**
@@ -133,24 +97,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      * @param value the value to convert
      * @return      the converted value
      */
-    public double toM(double value) {
-        return toMeters(value);
-    }
-
-    /**
-     * Converts the value from meters to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromM(double value) {
-        return fromMeters(value);
-    }
-
-    /**
-     * Converts the value to meters
-     * @param value the value to convert
-     * @return      the converted value
-     */
     public double toMeters(double value) {
         return convertTo(METER, value);
     }
@@ -162,24 +108,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      */
     public double fromMeters(double value) {
         return convertFrom(METER, value);
-    }
-
-    /**
-     * Converts the value to kilometers
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double toKM(double value) {
-        return toKilometers(value);
-    }
-
-    /**
-     * Converts the value from kilometers to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromKM(double value) {
-        return fromKilometers(value);
     }
 
     /**
@@ -205,24 +133,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      * @param value the value to convert
      * @return      the converted value
      */
-    public double toIn(double value) {
-        return toInches(value);
-    }
-
-    /**
-     * Converts the value from inches to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromIn(double value) {
-        return fromInches(value);
-    }
-
-    /**
-     * Converts the value to inches
-     * @param value the value to convert
-     * @return      the converted value
-     */
     public double toInches(double value) {
         return convertTo(INCH, value);
     }
@@ -234,24 +144,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      */
     public double fromInches(double value) {
         return convertFrom(INCH, value);
-    }
-
-    /**
-     * Converts the value to feet
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double toFt(double value) {
-        return toFeet(value);
-    }
-
-    /**
-     * Converts the value from feet to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromFt(double value) {
-        return fromFeet(value);
     }
 
     /**
@@ -277,24 +169,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      * @param value the value to convert
      * @return      the converted value
      */
-    public double toYd(double value) {
-        return toYard(value);
-    }
-
-    /**
-     * Converts the value from yard to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromYd(double value) {
-        return fromYard(value);
-    }
-
-    /**
-     * Converts the value to yard
-     * @param value the value to convert
-     * @return      the converted value
-     */
     public double toYard(double value) {
         return convertTo(YARD, value);
     }
@@ -306,24 +180,6 @@ public enum DistanceUnit implements Unit<DistanceUnit> {
      */
     public double fromYard(double value) {
         return convertFrom(YARD, value);
-    }
-
-    /**
-     * Converts the value to mile
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double toMi(double value) {
-        return toMile(value);
-    }
-
-    /**
-     * Converts the value from mile to the current unit
-     * @param value the value to convert
-     * @return      the converted value
-     */
-    public double fromMi(double value) {
-        return fromMile(value);
     }
 
     /**
