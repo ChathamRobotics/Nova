@@ -12,8 +12,6 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
-import java.sql.Time;
-
 import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
@@ -108,8 +106,8 @@ public class TimeUnitTest {
         @Test
         public void shouldBeInverseOfConvertTo() {
             assertEquals(
-                    TimeUnit.MINUTE.convertTo(TimeUnit.MILLISECOND, 6e4),
-                    TimeUnit.MILLISECOND.convertFrom(TimeUnit.MINUTE, 6e4),
+                    TimeUnit.MINUTE.convertTo(TimeUnit.MILLISECOND, 1),
+                    TimeUnit.MILLISECOND.convertFrom(TimeUnit.MINUTE, 1),
                     DELTA
             );
         }
