@@ -10,10 +10,18 @@ package org.chathamrobotics.nova.util.units;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
-    REVOLUTIONS_PER_MINUTE,
-    REVOLUTIONS_PER_SECOND,
-    RADIANS_PER_SECOND,
-    DEGREES_PER_SECOND;
+    REVOLUTIONS_PER_MINUTE(AngleUnit.REVOLUTIONS, TimeUnit.MINUTE),
+    REVOLUTIONS_PER_SECOND(AngleUnit.REVOLUTIONS, TimeUnit.SECOND),
+    RADIANS_PER_SECOND(AngleUnit.RADIANS, TimeUnit.SECOND),
+    DEGREES_PER_SECOND(AngleUnit.DEGREES, TimeUnit.SECOND);
+
+    private final AngleUnit angleUnit;
+    private final TimeUnit timeUnit;
+
+    AngularVelocityUnit(AngleUnit angleUnit, TimeUnit timeUnit) {
+        this.angleUnit = angleUnit;
+        this.timeUnit = timeUnit;
+    }
 
     /**
      * Converts the value from the current unit to revolutions per minute
@@ -144,45 +152,6 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
     public double convertTo(AngularVelocityUnit unit, double value) {
         if (unit == this) return value;
 
-        switch (this) {
-            case DEGREES_PER_SECOND:
-                switch (unit) {
-                    case REVOLUTIONS_PER_MINUTE:
-                        return value / 6;
-                    case REVOLUTIONS_PER_SECOND:
-                        return value / 360;
-                    case RADIANS_PER_SECOND:
-                        return Math.toRadians(value);
-                }
-            case RADIANS_PER_SECOND:
-                switch (unit) {
-                    case REVOLUTIONS_PER_MINUTE:
-                        return value * 30 / Math.PI;
-                    case REVOLUTIONS_PER_SECOND:
-                        return value / (2 * Math.PI);
-                    case DEGREES_PER_SECOND:
-                        return Math.toDegrees(value);
-                }
-            case REVOLUTIONS_PER_MINUTE:
-                switch (unit) {
-                    case REVOLUTIONS_PER_SECOND:
-                        return value / 60;
-                    case RADIANS_PER_SECOND:
-                        return value * Math.PI / 30;
-                    case DEGREES_PER_SECOND:
-                        return value * 6;
-                }
-            case REVOLUTIONS_PER_SECOND:
-                switch (unit) {
-                    case REVOLUTIONS_PER_MINUTE:
-                        return value * 60;
-                    case RADIANS_PER_SECOND:
-                        return value * 2 * Math.PI;
-                    case DEGREES_PER_SECOND:
-                        return value * 360;
-                }
-        }
-
-        throw new RuntimeException("Unreachable statement");
+        return timeUnit.convertFrom(unit.timeUnit, angleUnit.convertTo(unit.angleUnit, value));
     }
 }
