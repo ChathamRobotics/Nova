@@ -1395,6 +1395,6 @@ public class RobotLogger implements Telemetry {
     }
 
     private boolean shouldLog(Level level) {
-        return getLevel().priority < level.priority;
+        return getLevel().priority <= level.priority;
     }
 }
