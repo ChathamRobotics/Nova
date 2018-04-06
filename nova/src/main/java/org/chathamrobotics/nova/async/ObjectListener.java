@@ -24,6 +24,8 @@ public class ObjectListener<T> extends Listener {
         boolean test(T value) throws Exception;
     }
 
+    public final T object;
+
     /**
      * Creates a new {@link ObjectListener}
      * @param object    the object to test
@@ -37,5 +39,6 @@ public class ObjectListener<T> extends Listener {
                 return condition.test(object);
             }
         }, handler);
+        this.object = object;
     }
 }

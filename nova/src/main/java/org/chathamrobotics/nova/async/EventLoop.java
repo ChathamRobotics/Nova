@@ -26,7 +26,7 @@ public class EventLoop {
 
     protected String tag = TAG;
 
-    private final List<Listener> listeners = Collections.synchronizedList(new LinkedList<Listener>());
+    protected final List<Listener> listeners = Collections.synchronizedList(new LinkedList<Listener>());
 
     private final Runnable pollingLoop = new Runnable() {
         @Override
