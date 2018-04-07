@@ -6,21 +6,19 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 import org.chathamrobotics.nova.async.AsyncCallback;
-import org.chathamrobotics.nova.async.Listener;
 import org.chathamrobotics.nova.async.NovaEventLoop;
 import org.chathamrobotics.nova.async.ObjectListener;
 import org.chathamrobotics.nova.util.TimeoutChecker;
 import org.chathamrobotics.nova.util.units.AngleUnit;
 import org.chathamrobotics.nova.util.units.AngularVelocityUnit;
 
-import java.sql.Time;
 import java.util.concurrent.TimeoutException;
 
 /**
  * A utility for working with encoders
  */
 @SuppressWarnings({"WeakerAccess", "unused", "SameParameterValue", "EmptyCatchBlock"})
-public class Encoder {
+public class MotorEncoder {
     ////////// CONSTANTS ///////////
     public final static AngularVelocityUnit DEFAULT_VELOCITY_UNIT = AngularVelocityUnit.REVOLUTIONS_PER_MINUTE;
     public final static AngleUnit DEFAULT_HEADING_UNIT = AngleUnit.REVOLUTIONS;
@@ -41,10 +39,10 @@ public class Encoder {
 
     ////////// CONSTRUCTORS ///////////
     /**
-     * Creates a new instance of {@link Encoder}
+     * Creates a new instance of {@link MotorEncoder}
      * @param motor the encoder's motor
      */
-    public Encoder(DcMotor motor) {
+    public MotorEncoder(DcMotor motor) {
         this.motor = motor;
     }
 
