@@ -12,9 +12,6 @@ package org.chathamrobotics.nova.opmode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.chathamrobotics.nova.robot.Robot;
-import org.chathamrobotics.nova.util.Controller;
-
 /**
  * A template for creating linear opmodes
  */
