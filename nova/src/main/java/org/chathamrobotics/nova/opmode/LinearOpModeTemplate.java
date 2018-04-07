@@ -17,21 +17,10 @@ import org.chathamrobotics.nova.util.Controller;
 
 /**
  * A template for creating linear opmodes
- * @param <R>   the robot type
  */
-@SuppressWarnings({"unused", "WeakerAccess"})
-public abstract class LinearOpModeTemplate<R extends Robot> extends LinearOpMode {
+@SuppressWarnings({"unused", "WeakerAccess", "RedundantThrows"})
+public abstract class LinearOpModeTemplate extends LinearOpMode {
     private final boolean redTeam;
-
-    /**
-     * The robot
-     */
-    protected R robot;
-
-    /**
-     * The controllers
-     */
-    protected Controller controller1, controller2;
 
     /**
      * Creates a new instance of {@link LinearOpModeTemplate}
@@ -64,24 +53,22 @@ public abstract class LinearOpModeTemplate<R extends Robot> extends LinearOpMode
      * Synonymous with {@link OpMode#start()}, this method starts the robot if one has been set.
      * This method is automatically called at the beginning of the opmode, after start has been pressed
      */
-    public void begin() {
-        if (robot != null) robot.start();
-    }
+    public void begin() {}
 
     /**
      * Synonymous with {@link OpMode#stop()}, this method stops the robot if one has been set.
      * This method is automatically called at the end of the opmode
      */
     public void end() {
-        if (robot != null) robot.stop();
     }
 
+    /**
+     * Runs the opmode
+     * @throws InterruptedException thrown if the thread is interrupted
+     */
     @Override
     public void runOpMode() throws InterruptedException {
         try {
-            controller1 = new Controller(gamepad1);
-            controller2 = new Controller(gamepad2);
-
             // init
             setup();
 
