@@ -8,12 +8,7 @@ package org.chathamrobotics.nova.util;
  * @Last Modified time: 2/18/2018
  */
 
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-
-import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.robocol.RobocolParsable;
 
 import org.firstinspires.ftc.robotcore.internal.ui.GamepadUser;
 import org.junit.Test;
@@ -178,7 +173,7 @@ public class ControllerTest {
 
             gp.x = true;
             controller.update();
-            assertTrue(Controller.isTapped(controller.xState));
+            assertTrue(controller.xState.isTapped());
         }
 
         @Test
@@ -188,7 +183,7 @@ public class ControllerTest {
 
             gp.x = false;
             controller.update();
-            assertFalse(Controller.isTapped(controller.xState));
+            assertFalse(controller.xState.isTapped());
         }
     }
 
@@ -201,7 +196,7 @@ public class ControllerTest {
             gp.x = true;
             controller.update();
             controller.update();
-            assertTrue(Controller.isHeld(controller.xState));
+            assertTrue(controller.xState.isHeld());
         }
 
         @Test
@@ -213,7 +208,7 @@ public class ControllerTest {
             controller.update();
             gp.x = true;
             controller.update();
-            assertFalse(Controller.isHeld(controller.xState));
+            assertFalse(controller.xState.isHeld());
         }
     }
 
@@ -226,7 +221,7 @@ public class ControllerTest {
             gp.x = false;
             controller.update();
             controller.update();
-            assertTrue(Controller.isStationary(controller.xState));
+            assertTrue(controller.xState.isStationary());
         }
 
         @Test
@@ -238,7 +233,7 @@ public class ControllerTest {
             controller.update();
             gp.x = false;
             controller.update();
-            assertFalse(Controller.isHeld(controller.xState));
+            assertFalse(controller.xState.isStationary());
         }
     }
 
@@ -252,7 +247,7 @@ public class ControllerTest {
             controller.update();
             gp.x = false;
             controller.update();
-            assertTrue(Controller.isReleased(controller.xState));
+            assertTrue(controller.xState.isReleased());
         }
 
         @Test
@@ -264,7 +259,7 @@ public class ControllerTest {
             controller.update();
             gp.x = true;
             controller.update();
-            assertFalse(Controller.isHeld(controller.xState));
+            assertFalse(controller.xState.isReleased());
         }
     }
 

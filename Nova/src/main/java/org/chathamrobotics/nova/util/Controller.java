@@ -48,7 +48,48 @@ public class Controller extends Gamepad {
         /**
          * When the button is not pressed
          */
-        STATIONARY
+        STATIONARY;
+
+        /**
+         * Checks whether or not the button state is {@link ButtonState#TAPPED}
+         * @return  whether or not the button state is {@link ButtonState#TAPPED}
+         */
+        public boolean isTapped() {
+            return this == TAPPED;
+        }
+
+
+        /**
+         * Checks whether or not the button state is {@link ButtonState#HELD}
+         * @return  whether or not the button state is {@link ButtonState#HELD}
+         */
+        public boolean isHeld() {
+            return this == HELD;
+        }
+
+        /**
+         * Checks whether or not the button state is {@link ButtonState#RELEASED}
+         * @return  whether or not the button state is {@link ButtonState#RELEASED}
+         */
+        public boolean isReleased() {
+            return this == RELEASED;
+        }
+
+        /**
+         * Checks whether or not the button state is {@link ButtonState#STATIONARY}
+         * @return  whether or not the button state is {@link ButtonState#STATIONARY}
+         */
+        public boolean isStationary() {
+            return this == STATIONARY;
+        }
+
+        /**
+         * Checks whether or not the button state is {@link ButtonState#TAPPED} or {@link ButtonState#HELD}
+         * @return  whether or not the button state is {@link ButtonState#TAPPED} or {@link ButtonState#HELD}
+         */
+        public boolean isPressed() {
+            return isTapped() || isHeld();
+        }
     }
 
     /**
@@ -57,7 +98,7 @@ public class Controller extends Gamepad {
      * @return      whether or not the button is pressed
      */
     public static boolean isPressed(ButtonState state) {
-        return state == ButtonState.TAPPED || state == ButtonState.HELD;
+        return state.isPressed();
     }
 
     /**
@@ -76,46 +117,6 @@ public class Controller extends Gamepad {
      */
     public static boolean isPressed(float button) {
         return Math.abs(button) > 1e-8;
-    }
-
-    /**
-     * Checks whether or not the button is tapped
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is tapped
-     */
-    public static boolean isTapped(ButtonState state) {
-        return state == ButtonState.TAPPED;
-    }
-
-    /**
-     * Checks whether or not the button is held
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is held
-     */
-    public static boolean isHeld(ButtonState state) {
-        return state == ButtonState.HELD;
-    }
-
-    /**
-     * Checks whether or not the button is stationary
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is stationary
-     */
-    public static boolean isStationary(ButtonState state) {
-        return state == ButtonState.STATIONARY;
-    }
-
-    /**
-     * Checks whether or not the button is released
-     * @see ButtonState
-     * @param state the button's state
-     * @return      whether or not the button is released
-     */
-    public static boolean isReleased(ButtonState state) {
-        return state == ButtonState.RELEASED;
     }
 
     private final Gamepad gamepad;
