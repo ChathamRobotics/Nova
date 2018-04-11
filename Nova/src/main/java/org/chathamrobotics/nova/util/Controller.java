@@ -16,11 +16,8 @@ import android.view.MotionEvent;
 
 import com.qualcomm.robotcore.exception.RobotCoreException;
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.robocol.RobocolParsable;
 
 import org.firstinspires.ftc.robotcore.internal.ui.GamepadUser;
-
-import java.lang.reflect.Field;
 
 /**
  * A utility wrapper for gamepad

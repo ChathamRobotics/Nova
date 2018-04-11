@@ -10,7 +10,6 @@ package org.chathamrobotics.nova.async;
 
 import android.support.annotation.NonNull;
 
-import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 /**

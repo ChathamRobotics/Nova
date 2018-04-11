@@ -8,7 +8,6 @@ package org.chathamrobotics.nova.util.tuple;
  * @Last Modified time: 2/15/2018
  */
 
-import org.chathamrobotics.nova.util.tuple.Tuple;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -16,7 +15,11 @@ import org.junit.runner.RunWith;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Enclosed.class)
 public class TupleTest {

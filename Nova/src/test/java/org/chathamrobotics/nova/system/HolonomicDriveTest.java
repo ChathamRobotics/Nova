@@ -8,21 +8,8 @@ package org.chathamrobotics.nova.system;
  * @Last Modified time: 3/30/2018
  */
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-
-import org.chathamrobotics.nova.mocks.MockMotor;
-import org.chathamrobotics.nova.util.RobotLogger;
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.internal.opmode.TelemetryImpl;
-import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.mockito.AdditionalMatchers;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 @RunWith(Enclosed.class)
 public class HolonomicDriveTest {

@@ -27,6 +27,7 @@ public class MotorEncoder {
     private final static long NO_TIMEOUT = -1;
     private final static NovaEventLoop EVENT_LOOP = NovaEventLoop.getInstance();
     private final static ObjectListener.Condition<DcMotor> IS_NOT_BUSY = new ObjectListener.Condition<DcMotor>() {
+        @SuppressWarnings("RedundantThrows")
         @Override
         public boolean test(DcMotor motor) throws Exception {
             return ! motor.isBusy();
