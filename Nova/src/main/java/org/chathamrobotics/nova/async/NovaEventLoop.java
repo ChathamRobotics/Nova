@@ -11,6 +11,8 @@ package org.chathamrobotics.nova.async;
 
 import android.support.annotation.NonNull;
 
+import java.util.ListIterator;
+
 /**
  * The event loop used by nova
  */
@@ -127,5 +129,18 @@ public class NovaEventLoop extends EventLoop {
         return addListener(
                 Listener.once(Listener.timeout(listener, timeout, this), this)
         ) != null ? listener : null;
+    }
+
+    /**
+     * Removes all of the listeners for a given object
+     * @param object    the object who's listeners to remove
+     * @param <T>       the type of the object
+     */
+    public <T> void removeAllListeners(T object) {
+        for (ListIterator<Listener> itr = listeners.listIterator(); itr.hasNext();) {
+            Listener listener = itr.next();
+            if (listener instanceof ObjectListener && ((ObjectListener) listener).object == object)
+                itr.remove();
+        }
     }
 }

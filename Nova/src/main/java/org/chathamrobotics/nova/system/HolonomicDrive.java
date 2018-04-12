@@ -12,9 +12,6 @@ package org.chathamrobotics.nova.system;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.util.RobotLog;
-
-import org.chathamrobotics.nova.robot.Robot;
 import org.chathamrobotics.nova.robot.RobotConfiguration;
 import org.chathamrobotics.nova.util.RobotLogger;
 import org.chathamrobotics.nova.util.units.AngleUnit;
@@ -127,7 +124,7 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     }
 
     /////////// FIELDS /////////////////////
-    private final DcMotor frontLeft, frontRight, backRight, backLeft;
+    protected final DcMotor frontLeft, frontRight, backRight, backLeft;
     private double offsetAngle = 0;
 
     /////////// CONSTRUCTORS ///////////////
@@ -238,17 +235,9 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
         logger.debug.log("Adjusted direction (rad)", direction);
         logger.debug.log("Rotation", rotation);
 
-        double a = ROOT_TWO_OVER_FOUR * magnitude;
+        double[] motorPowers = calcMotorValues(magnitude, direction, rotation);
 
-        double br = a * (Math.sin(direction) + Math.cos(direction)), fl = -br;
-        double bl = a * (Math.cos(direction) - Math.sin(direction)), fr = -bl;
-
-        fl -= rotation;
-        fr -= rotation;
-        br -= rotation;
-        bl -= rotation;
-
-        setMotorPowers(fl, fr, br, bl);
+        setMotorPowers(motorPowers[0], motorPowers[1], motorPowers[2], motorPowers[3]);
     }
 
     /////////// BEHAVIOR ///////////////////
@@ -332,7 +321,34 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
         setPower(0, 0, power);
     }
 
-    protected void setMotorPowers(double fl, double fr, double br, double bl) {
+    /**
+     * Calculates the motor values
+     * @param magnitude the magnitude of the vector
+     * @param direction the direction of the vector
+     * @param rotation  the rotation to perform
+     * @return          the motor values {fl, fr, br, bl}
+     */
+    protected double[] calcMotorValues(double magnitude, double direction, double rotation) {
+        double[] values = new double[4];
+        double a = ROOT_TWO_OVER_FOUR * magnitude;
+
+        double br = a * (Math.sin(direction) + Math.cos(direction)), fl = -br;
+        double bl = a * (Math.cos(direction) - Math.sin(direction)), fr = -bl;
+
+        fl -= rotation;
+        fr -= rotation;
+        br -= rotation;
+        bl -= rotation;
+
+        values[0] = fl;
+        values[1] = fr;
+        values[2] = br;
+        values[3] = bl;
+
+        return values;
+    }
+
+    private void setMotorPowers(double fl, double fr, double br, double bl) {
         logger.verbose.log("front left power", fl);
         logger.verbose.log("front right power", fr);
         logger.verbose.log("back right power", br);
