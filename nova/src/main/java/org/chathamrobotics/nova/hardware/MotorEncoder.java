@@ -29,13 +29,6 @@ public class MotorEncoder {
     private final static String TAG = MotorEncoder.class.getSimpleName();
     private final static long NO_TIMEOUT = -1;
     private final static NovaEventLoop EVENT_LOOP = NovaEventLoop.getInstance();
-    private final static ObjectListener.Condition<DcMotor> IS_NOT_BUSY = new ObjectListener.Condition<DcMotor>() {
-        @SuppressWarnings("RedundantThrows")
-        @Override
-        public boolean test(DcMotor motor) throws Exception {
-            return ! motor.isBusy();
-        }
-    };
 
     private final static AsyncCallback NOOP_CALLBACK = new AsyncCallback() {
         @Override
@@ -710,6 +703,15 @@ public class MotorEncoder {
 
     /**
      * Rotates the motor shaft by the given angle asynchronously (nonblocking)
+     * @param angle     the angle through which to rotate in degrees
+     * @param power     the power to set the motor to
+     */
+    public void rotate(double angle, double delta, double power) {
+        rotate(angle, delta, DEFAULT_ROTATION_UNIT, power, null, NO_TIMEOUT);
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle asynchronously (nonblocking)
      * @param angle     the angle through which to rotate
      * @param unit      the unit of measure for the angle
      * @param power     the power to set the motor to
@@ -720,12 +722,32 @@ public class MotorEncoder {
 
     /**
      * Rotates the motor shaft by the given angle asynchronously (nonblocking)
+     * @param angle     the angle through which to rotate
+     * @param unit      the unit of measure for the angle
+     * @param power     the power to set the motor to
+     */
+    public void rotate(double angle, double delta, @NonNull AngleUnit unit, double power) {
+        rotate(angle, delta, unit, power, null, NO_TIMEOUT);
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle asynchronously (nonblocking)
      * @param angle     the angle through which to rotate in degrees
      * @param power     the power to set the motor to
      * @param callback  called when the rotation is finished
      */
     public void rotate(double angle, double power, AsyncCallback callback) {
         rotate(angle, DEFAULT_ROTATION_UNIT, power, callback, NO_TIMEOUT);
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle asynchronously (nonblocking)
+     * @param angle     the angle through which to rotate in degrees
+     * @param power     the power to set the motor to
+     * @param callback  called when the rotation is finished
+     */
+    public void rotate(double angle, double delta, double power, AsyncCallback callback) {
+        rotate(angle, delta, DEFAULT_ROTATION_UNIT, power, callback, NO_TIMEOUT);
     }
 
     /**
@@ -801,11 +823,19 @@ public class MotorEncoder {
 
     /**
      * Rotates the motor shaft by the given angle synchronously (blocking)
-     * @param angle                 the angle through which to rotate in degrees
-     * @param power                 the power to set the motor to
-     * @throws InterruptedException thrown if the thread is interrupted
+     * @param angle     the angle through which to rotate in degrees
+     * @param power     the power to set the motor to
      */
-    public void rotateSync(double angle, double power) throws InterruptedException {
+    public void rotateSync(double angle, double power) {
+        rotateSync(angle, DEFAULT_ROTATION_UNIT, power);
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle synchronously (blocking)
+     * @param angle     the angle through which to rotate in degrees
+     * @param power     the power to set the motor to
+     */
+    public void rotateSync(double angle, double delta,  double power) {
         rotateSync(angle, DEFAULT_ROTATION_UNIT, power);
     }
 
@@ -815,20 +845,43 @@ public class MotorEncoder {
      * @param power                 the power to set the motor to
      * @param timeout               the timeout for the operation. If timeout < 1 then no timeout is set
      * @throws TimeoutException     thrown if the operation times out
-     * @throws InterruptedException thrown if the thread is interrupted
      */
-    public void rotateSync(double angle, double power, long timeout) throws TimeoutException, InterruptedException {
+    public void rotateSync(double angle, double power, long timeout) throws TimeoutException {
         rotateSync(angle, DEFAULT_ROTATION_UNIT, power, timeout);
     }
 
     /**
      * Rotates the motor shaft by the given angle synchronously (blocking)
-     * @param angle                 the angle through which to rotate
-     * @param unit                  the unit of measure for the angle
+     * @param angle                 the angle through which to rotate in degrees
+     * @param delta                 the angle threshold
      * @param power                 the power to set the motor to
-     * @throws InterruptedException thrown if the thread is interrupted
+     * @param timeout               the timeout for the operation. If timeout < 1 then no timeout is set
+     * @throws TimeoutException     thrown if the operation times out
      */
-    public void rotateSync(double angle, @NonNull AngleUnit unit, double power) throws InterruptedException {
+    public void rotateSync(double angle, double delta, double power, long timeout) throws TimeoutException{
+        rotateSync(angle, delta, DEFAULT_ROTATION_UNIT, power, timeout);
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle synchronously (blocking)
+     * @param angle     the angle through which to rotate
+     * @param unit      the unit of measure for the angle
+     * @param power     the power to set the motor to
+     */
+    public void rotateSync(double angle, @NonNull AngleUnit unit, double power) {
+        try {
+            rotateSync(angle, unit, power, NO_TIMEOUT);
+        } catch (TimeoutException e) {}
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle synchronously (blocking)
+     * @param angle     the angle through which to rotate
+     * @param delta     the angle threshold
+     * @param unit      the unit of measure for the angle
+     * @param power     the power to set the motor to
+     */
+    public void rotateSync(double angle, double delta, @NonNull AngleUnit unit, double power) {
         try {
             rotateSync(angle, unit, power, NO_TIMEOUT);
         } catch (TimeoutException e) {}
@@ -841,20 +894,33 @@ public class MotorEncoder {
      * @param power                 the power to set the motor to
      * @param timeout               the timeout for the operation. If timeout < 1 then no timeout is set
      * @throws TimeoutException     thrown if the operation times out
-     * @throws InterruptedException thrown if the thread is interrupted
      */
-    public void rotateSync(double angle, @NonNull AngleUnit unit, double power, long timeout) throws TimeoutException, InterruptedException {
+    public void rotateSync(double angle, @NonNull AngleUnit unit, double power, long timeout) throws TimeoutException {
+        rotateSync(angle, DEFAULT_DELTA, unit, power, timeout);
+    }
+
+    /**
+     * Rotates the motor shaft by the given angle synchronously (blocking)
+     * @param angle                 the angle through which to rotate
+     * @param delta                 angle threshold
+     * @param unit                  the unit of measure for the angle
+     * @param power                 the power to set the motor to
+     * @param timeout               the timeout for the operation. If timeout < 1 then no timeout is set
+     * @throws TimeoutException     thrown if the operation times out
+     */
+    public void rotateSync(double angle, double delta, @NonNull AngleUnit unit, double power, long timeout) throws TimeoutException {
         TimeoutChecker checker = null;
 
         if (timeout > 0) checker = new TimeoutChecker(timeout, "rotateSync timed out");
 
-        setTargetHeading(getHeading() + unit.toRevolutions(angle));
+        double target = getHeading() + unit.toRevolutions(angle);
+        setTargetHeading(target);
 
         motor.setPower(power);
 
-        while (motor.isBusy()) {
+        while (! isAtHeading(target, delta, unit) && motor.isBusy()) {
             if (checker != null) checker.check();
-            Thread.sleep(10);
+            Thread.yield();
         }
     }
 }
