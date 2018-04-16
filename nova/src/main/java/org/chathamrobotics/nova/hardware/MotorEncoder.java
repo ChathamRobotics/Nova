@@ -576,8 +576,8 @@ public class MotorEncoder {
             ObjectListener.Condition<DcMotor> con = new IsAtPositionCondition((int) (unit.toRevolutions(delta) * getTicksPerRev()));
 
             if (callback != null) {
-                if (timeout > 0) EVENT_LOOP.on(motor, IS_NOT_BUSY, callback, timeout);
-                else EVENT_LOOP.on(motor, IS_NOT_BUSY, callback);
+                if (timeout > 0) EVENT_LOOP.on(motor, con, callback, timeout);
+                else EVENT_LOOP.on(motor, con, callback);
             } else {
                 EVENT_LOOP.on(motor, con, NOOP_CALLBACK);
             }
