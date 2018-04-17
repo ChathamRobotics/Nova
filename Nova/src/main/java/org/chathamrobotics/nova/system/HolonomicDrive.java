@@ -186,7 +186,7 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
     public double getPower() {
         confirmRunning("getPower");
 
-        return calcMagnitude(frontLeft, frontRight, backRight, backLeft);
+        return calcMagnitude(frontLeft.getPower(), frontRight.getPower(), backRight.getPower(), backLeft.getPower());
     }
 
     /**
@@ -354,10 +354,10 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
      * @param bl    the back left motor
      * @return      the magnitude
      */
-    protected double calcMagnitude(DcMotor fl, DcMotor fr, DcMotor br, DcMotor bl) {
+    protected double calcMagnitude(double fl, double fr, double br, double bl) {
         return ROOT_TWO_OVER_TWO * Math.hypot(
-                -fl.getPower() - fr.getPower() + br.getPower() + bl.getPower(),
-                -fl.getPower() + fr.getPower() + br.getPower() - bl.getPower()
+                -fl - fr + br + bl,
+                -fl + fr + br - bl
         );
     }
 
