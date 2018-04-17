@@ -12,9 +12,9 @@ package org.chathamrobotics.nova.util.units;
  * Units for angle measure. This does not normalize angles like {@link org.firstinspires.ftc.robotcore.external.navigation.AngleUnit}
  */
 public enum AngleUnit implements Unit<AngleUnit> {
-    RADIANS,
-    DEGREES,
-    REVOLUTIONS;
+    RADIANS(2 * Math.PI),
+    DEGREES(360),
+    REVOLUTIONS(1);
 
     private static final double TWO_PI = 2 * Math.PI;
 
@@ -32,6 +32,20 @@ public enum AngleUnit implements Unit<AngleUnit> {
         }
 
         throw new RuntimeException("Unreachable statement");
+    }
+
+    private final double full;
+
+    AngleUnit(double full) {
+        this.full = full;
+    }
+
+    /**
+     * Gets the value for one full circle in the current unit
+     * @return  the value for one full circle in the current unit
+     */
+    public double getFull() {
+        return full;
     }
 
     /**
