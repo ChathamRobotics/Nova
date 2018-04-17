@@ -14,7 +14,7 @@ import org.chathamrobotics.nova.util.RobotLogger;
  * A implementation of robot system
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
-abstract class RobotSystemImpl implements RobotSystem {
+public abstract class RobotSystemImpl implements RobotSystem {
     protected final RobotLogger logger;
 
     private State state;
