@@ -27,6 +27,22 @@ public enum VelocityUnit implements Unit<VelocityUnit> {
     }
 
     /**
+     * Gets the distance unit for the velocity unit
+     * @return  the distance unit for the velocity unit
+     */
+    public DistanceUnit getDistanceUnit() {
+        return distanceUnit;
+    }
+
+    /**
+     * Gets the time unit for the velocity unit
+     * @return  the time unit for the velocity unit
+     */
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
+
+    /**
      * Converts from the current unit into meters per second
      * @param value the value to convert
      * @return      the converted value
