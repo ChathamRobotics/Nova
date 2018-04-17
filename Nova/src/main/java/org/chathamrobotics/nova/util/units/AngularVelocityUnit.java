@@ -24,6 +24,22 @@ public enum AngularVelocityUnit implements Unit<AngularVelocityUnit> {
     }
 
     /**
+     * Gets the angle unit for the angular velocity unit
+     * @return  the angle unit for the angular velocity unit
+     */
+    public AngleUnit getAngleUnit() {
+        return angleUnit;
+    }
+
+    /**
+     * Gets the time unit for the angular velocity unit
+     * @return  the time unit for the angular velocity unit
+     */
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
+
+    /**
      * Converts the value from the current unit to revolutions per minute
      * @param value the value to convert
      * @return      the converted value
