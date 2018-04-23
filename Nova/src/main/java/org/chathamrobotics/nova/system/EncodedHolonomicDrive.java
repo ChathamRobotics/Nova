@@ -17,12 +17,30 @@ import org.chathamrobotics.nova.util.units.AngleUnit;
 import org.chathamrobotics.nova.util.units.DistanceUnit;
 import org.chathamrobotics.nova.util.units.VelocityUnit;
 
-@SuppressWarnings("unused")
+/**
+ * A encoded version of holonomic driver
+ */
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class EncodedHolonomicDrive extends HolonomicDrive {
+    public static final VelocityUnit DEFAULT_VELOCITY_UNIT = VelocityUnit.METER_PER_SECOND;
+    public static final AngleUnit DEFAULT_DIRECTION_UNIT = AngleUnit.RADIANS;
+    public static final DistanceUnit DEFAULT_DISTANCE_UNIT = DistanceUnit.METER;
+
     private final double wheelRadius;
     private final GyroSensor gyro;
     private final MotorEncoder frontLeftEncoder, frontRightEncoder, backRightEncoder, backLeftEncoder;
 
+    /**
+     * Creates a new instance of {@link EncodedHolonomicDrive}
+     * @param wheelDiameter the diameter of the wheel
+     * @param diameterUnit  the unit of the diameter
+     * @param gyro          the gyro sensor
+     * @param frontLeft     the front left drive motor
+     * @param frontRight    the front right drive motor
+     * @param backRight     the back right drive motor
+     * @param backLeft      the back left drive motor
+     * @param logger        the robot logger
+     */
     public EncodedHolonomicDrive(
             double wheelDiameter,
             DistanceUnit diameterUnit,
@@ -49,6 +67,42 @@ public class EncodedHolonomicDrive extends HolonomicDrive {
         backLeftEncoder = new MotorEncoder(backLeft);
     }
 
+    /**
+     * Sets the velocity of the robot
+     * @param velocity      the velocity to set in meters per second
+     * @param direction     the direction to apply the velocity in radians
+     */
+    public void setVelocity(double velocity, double direction) {
+        setVelocity(velocity, DEFAULT_VELOCITY_UNIT, direction, DEFAULT_DIRECTION_UNIT);
+    }
+
+    /**
+     * Sets the velocity of the robot
+     * @param velocity      the velocity to set
+     * @param velocityUnit  the unit of the velocity
+     * @param direction     the direction to apply the velocity in radians
+     */
+    public void setVelocity(double velocity, VelocityUnit velocityUnit, double direction) {
+        setVelocity(velocity, velocityUnit, direction, DEFAULT_DIRECTION_UNIT);
+    }
+
+    /**
+     * Sets the velocity of the robot
+     * @param velocity      the velocity to set in meters per second
+     * @param direction     the direction to apply the velocity
+     * @param directionUnit the unit of the direction
+     */
+    public void setVelocity(double velocity, double direction, AngleUnit directionUnit) {
+        setVelocity(velocity, DEFAULT_VELOCITY_UNIT, direction, directionUnit);
+    }
+
+    /**
+     * Sets the velocity of the robot
+     * @param velocity      the velocity to set
+     * @param velocityUnit  the unit of the velocity
+     * @param direction     the direction to apply the velocity
+     * @param directionUnit the unit of the direction
+     */
     public void setVelocity(double velocity, VelocityUnit velocityUnit, double direction, AngleUnit directionUnit) {
         velocity = velocityUnit.getTimeUnit().convertFrom(
                 MotorEncoder.DEFAULT_VELOCITY_UNIT.getTimeUnit(),
@@ -62,6 +116,19 @@ public class EncodedHolonomicDrive extends HolonomicDrive {
         backLeftEncoder.setVelocity(motorVelocities[3]);
     }
 
+    /**
+     * Gets the velocity of the robot
+     * @return              the velocity in meters per second
+     */
+    public double getVelocity() {
+        return getVelocity(DEFAULT_VELOCITY_UNIT);
+    }
+
+    /**
+     * Gets the velocity of the robot
+     * @param velocityUnit  the unit to return the velocity in
+     * @return              the velocity
+     */
     public double getVelocity(VelocityUnit velocityUnit) {
         return MotorEncoder.DEFAULT_VELOCITY_UNIT.getTimeUnit().convertFrom(velocityUnit.getTimeUnit(), angularToLinear(calcMagnitude(
                 frontLeftEncoder.getVelocity(),
