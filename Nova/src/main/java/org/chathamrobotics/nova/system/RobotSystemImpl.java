@@ -8,14 +8,22 @@ package org.chathamrobotics.nova.system;
  * @Last Modified time: 3/24/2018
  */
 
+import org.chathamrobotics.nova.async.Listener;
+import org.chathamrobotics.nova.async.NovaEventLoop;
 import org.chathamrobotics.nova.util.RobotLogger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A implementation of robot system
  */
 @SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class RobotSystemImpl implements RobotSystem {
+    private static final NovaEventLoop EVENT_LOOP = NovaEventLoop.getInstance();
+
     protected final RobotLogger logger;
+    protected final List<Listener> openListeners = new ArrayList<>();
 
     private State state;
 
@@ -70,5 +78,9 @@ public abstract class RobotSystemImpl implements RobotSystem {
     protected void confirmRunning(String reason) {
         if (this.state != State.RUNNING)
             throw new IllegalStateException("The system must be running inorder to " + reason);
+    }
+
+    protected void removeListeners() {
+        for (Listener listener : openListeners) EVENT_LOOP.removeListener(listener);
     }
 }

@@ -28,7 +28,7 @@ public class EncodedHolonomicDrive extends HolonomicDrive {
 
     private final double wheelRadius;
     private final GyroSensor gyro;
-    private final MotorEncoder frontLeftEncoder, frontRightEncoder, backRightEncoder, backLeftEncoder;
+    protected final MotorEncoder frontLeftEncoder, frontRightEncoder, backRightEncoder, backLeftEncoder;
 
     /**
      * Creates a new instance of {@link EncodedHolonomicDrive}
@@ -56,9 +56,9 @@ public class EncodedHolonomicDrive extends HolonomicDrive {
         wheelRadius = diameterUnit.toMeters(wheelDiameter);
         this.gyro = gyro;
 
-        if (frontLeft.getMotorType() != frontRight.getMotorType()
-                || backLeft.getMotorType() != backRight.getMotorType()
-                || frontLeft.getMotorType() != backLeft.getMotorType())
+        if (frontLeft.getMotorType().getTicksPerRev() != frontRight.getMotorType().getTicksPerRev()
+                || backLeft.getMotorType().getTicksPerRev() != backRight.getMotorType().getTicksPerRev()
+                || frontLeft.getMotorType().getTicksPerRev() != backLeft.getMotorType().getTicksPerRev())
             throw new IllegalArgumentException("All of the motors must be of the same type");
 
         frontLeftEncoder = new MotorEncoder(frontLeft);
@@ -138,7 +138,14 @@ public class EncodedHolonomicDrive extends HolonomicDrive {
         ), MotorEncoder.DEFAULT_VELOCITY_UNIT.getAngleUnit(), velocityUnit.getDistanceUnit()));
     }
 
-    public void move(double distance, double delta, DistanceUnit distanceUnit, double power, double direction, AngleUnit directionUnit) {
+    public void move(
+            double distance,
+            double delta,
+            DistanceUnit distanceUnit,
+            double power,
+            double direction,
+            AngleUnit directionUnit
+    ) {
         distance = linearToAngular(distance, distanceUnit, MotorEncoder.DEFAULT_ROTATION_UNIT);
         delta = linearToAngular(delta, distanceUnit, MotorEncoder.DEFAULT_ROTATION_UNIT);
         double[] motorRotations = calcMotorValues(distance, directionUnit.toRadians(direction), 0);
