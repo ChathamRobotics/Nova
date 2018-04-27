@@ -13,6 +13,7 @@ import org.chathamrobotics.nova.async.NovaEventLoop;
 import org.chathamrobotics.nova.util.RobotLogger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public abstract class RobotSystemImpl implements RobotSystem {
     private static final NovaEventLoop EVENT_LOOP = NovaEventLoop.getInstance();
 
     protected final RobotLogger logger;
-    protected final List<Listener> openListeners = new ArrayList<>();
+    protected final List<Listener> openListeners = new LinkedList<>();
 
     private State state;
 
@@ -66,21 +67,36 @@ public abstract class RobotSystemImpl implements RobotSystem {
         this.state = state;
     }
 
+    /**
+     * To be called on start to confirm that the system is initialized
+     */
     protected void preStart() {
         if (this.state != State.INITIALIZED && this.state != State.RUNNING)
             throw new IllegalStateException("The system must be initialized before starting");
     }
 
-    protected void confirmRunning() {
-        confirmRunning("perform this operation");
-    }
-
-    protected void confirmRunning(String reason) {
+    /**
+     * Confirms that the system is running. If not a {@link IllegalStateException} will be thrown
+     * @param operation the operation being performed
+     */
+    protected void confirmRunning(String operation) {
         if (this.state != State.RUNNING)
-            throw new IllegalStateException("The system must be running inorder to " + reason);
+            throw new IllegalStateException("The system must be running inorder to " + operation);
     }
 
-    protected void removeListeners() {
+    /**
+     * Confirms that the system is initialized. If it is not a {@link IllegalStateException} will be thrown
+     * @param operation the name of the operation being performed
+     */
+    protected void confirmInitialized(String operation) {
+        if (! isInitialized())
+            throw new IllegalStateException(operation + " can only be called after initialization");
+    }
+
+    /**
+     * Removes all of the open listeners
+     */
+    protected void removeOpenListeners() {
         for (Listener listener : openListeners) EVENT_LOOP.removeListener(listener);
     }
 }
