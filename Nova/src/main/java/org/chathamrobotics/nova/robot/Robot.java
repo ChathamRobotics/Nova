@@ -58,11 +58,9 @@ public class Robot extends ArrayList<RobotSystem> {
         // wait for all systems to finish initializing
         for (RobotSystem system : this)
             while (! system.isInitialized()) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException("thread interrupted", e);
-                }
+                logger.debug.logf("Waiting for %s to initialize", system);
+                logger.update();
+                Thread.yield();
             }
     }
 
@@ -71,17 +69,18 @@ public class Robot extends ArrayList<RobotSystem> {
      */
     public void start() {
         // start all systems
-        for (RobotSystem system : this)
+        for (RobotSystem system : this) {
             system.start();
+        }
+
+        logger.update();
 
         // wait for all systems to finish starting
         for (RobotSystem system : this)
             while (! system.isRunning()) {
-                try {
-                    Thread.sleep(10);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException("thread interrupted", e);
-                }
+                logger.debug.logf("Waiting for %s to start", system);
+                logger.update();
+                Thread.yield();
             }
     }
 
@@ -90,7 +89,10 @@ public class Robot extends ArrayList<RobotSystem> {
      */
     public void stop() {
         // call stop on all systems
-        for (RobotSystem system : this) system.stop();
+        for (RobotSystem system : this)
+            system.stop();
+
+        logger.update();
     }
 
     @Override
