@@ -12,7 +12,6 @@ import org.chathamrobotics.nova.async.Listener;
 import org.chathamrobotics.nova.async.NovaEventLoop;
 import org.chathamrobotics.nova.util.RobotLogger;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,6 +96,6 @@ public abstract class RobotSystemImpl implements RobotSystem {
      * Removes all of the open listeners
      */
     protected void removeOpenListeners() {
-        for (Listener listener : openListeners) EVENT_LOOP.removeListener(listener);
+        EVENT_LOOP.removeAllListeners(openListeners);
     }
 }
