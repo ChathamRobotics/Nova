@@ -12,6 +12,7 @@ package org.chathamrobotics.nova.async;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,6 +53,7 @@ public class EventLoop {
      * Note: it will start again if addListener() is called
      */
     public void stop() {
+        Log.i(TAG, "Stopping Event Loop");
         // stop thread and give it a chance to close gracefully
         Thread cache = pollingThread;
         pollingThread = null;
@@ -95,6 +97,14 @@ public class EventLoop {
     }
 
     /**
+     * Removes all of the listeners in the given collection. For the best performance use a {@link LinkedList}
+     * @param listeners the listeners to remove
+     */
+    public void removeAllListeners(Collection<Listener> listeners) {
+        for (Listener listener : listeners) removeListener(listener);
+    }
+
+    /**
      * Removes the listener
      * @param listener  the listener
      * @return          the removed listener. Null if unsuccessful.
@@ -107,7 +117,7 @@ public class EventLoop {
 
     private void startPolling() {
         //noinspection ConstantConditions
-        if (pollingLoop != null && pollingThread.isAlive()) return;
+        if (pollingThread != null && pollingThread.isAlive()) return;
 
         pollingThread = new Thread(pollingThread, tag);
         pollingThread.setDaemon(true);
