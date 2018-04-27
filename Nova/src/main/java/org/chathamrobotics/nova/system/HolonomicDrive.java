@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.Range;
 
+import org.chathamrobotics.nova.robot.Robot;
 import org.chathamrobotics.nova.robot.RobotConfiguration;
 import org.chathamrobotics.nova.util.RobotLogger;
 import org.chathamrobotics.nova.util.units.AngleUnit;
@@ -121,6 +122,24 @@ public class HolonomicDrive extends RobotSystemImpl implements DriveSystem {
                 hardwareMap.dcMotor.get(conf.getBRDriveMotorName()),
                 hardwareMap.dcMotor.get(conf.getBLDriveMotorName()),
                 logger.child(TAG)
+        );
+    }
+
+    /**
+     * Builds a new instance of {@link HolonomicDrive}
+     * @param robot         the robot
+     * @param configuration the configuration for the system
+     * @return              the built instance
+     */
+    public static HolonomicDrive build(Robot robot, Configuration configuration) {
+        HardwareMap hardwareMap = robot.getHardwareMap();
+
+        return new HolonomicDrive(
+                hardwareMap.dcMotor.get(configuration.getFLDriveMotorName()),
+                hardwareMap.dcMotor.get(configuration.getFRDriveMotorName()),
+                hardwareMap.dcMotor.get(configuration.getBRDriveMotorName()),
+                hardwareMap.dcMotor.get(configuration.getBLDriveMotorName()),
+                robot.logger
         );
     }
 
