@@ -61,6 +61,11 @@ public abstract class RobotSystemImpl implements RobotSystem {
         return this.state;
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
+
     // sets the state
     protected void setState(State state) {
         this.state = state;
