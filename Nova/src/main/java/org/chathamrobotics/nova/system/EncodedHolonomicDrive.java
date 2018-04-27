@@ -157,7 +157,7 @@ public class EncodedHolonomicDrive extends HolonomicDrive {
     }
 
     private double linearToAngular(double linear, DistanceUnit distanceUnit, AngleUnit angleUnit) {
-        return distanceUnit.toMeters(linear) / (2 * Math.PI * wheelRadius) * angleUnit.getFull();
+        return angleUnit.fromRevolutions(distanceUnit.toMeters(linear) / (2 * Math.PI * wheelRadius));
     }
 
     private double angularToLinear(double angular, AngleUnit angleUnit, DistanceUnit distanceUnit) {
